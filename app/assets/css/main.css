@@ -1,0 +1,502 @@
+:root {
+  /* 🎨 COLOR PALETTE */
+  /* Used for main backgrounds -- Inspired by the 'Park Map' paper */
+  --clr-bg-primary: #f4ede0;
+  --clr-bg-secondary: #e0d7c6;
+  --clr-bg-tertiary: #cdcdc0;
+
+  /* Used for text -- Inspired by the map's dark grayish-blue ink */
+  --clr-text-primary: #2c3e50;
+  --clr-text-secondary: #5c6a7d;
+  --clr-text-muted: #8d9ba9;
+
+  /* Used for accents and interactive elements */
+  --clr-accent-primary: #d96f2e;
+  /* Vibrant orange from 'FIELD GUIDE' text */
+  --clr-accent-secondary: #588157;
+  /* Forest green from map trees */
+  --clr-accent-success: #588157;
+  /* Re-using green for success */
+  --clr-accent-warning: #b58900;
+  /* Muted, earthy gold */
+  --clr-accent-danger: #a13d36;
+  /* Muted, earthy red */
+
+  /* Used for borders and dividers */
+  --clr-border: #c0c0b2;
+
+  /* the shadow color's RGB values */
+  --shadow-color-rgb: 44, 62, 80;
+  /* Based on your light mode's --clr-text-primary */
+
+  /* 🖋️ TYPOGRAPHY (Consider adding a vintage display/serif font) */
+  --font-family-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-family-mono: 'Fira Code', 'Courier New', monospace;
+
+  /* Font Sizes (based on 1rem = 16px) */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+
+  /* Font Weights */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* 📐 SPACING & LAYOUT */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+
+  /* ✨ BORDERS & SHADOWS */
+  --border-radius-sm: 0.25rem;
+  --border-radius-md: 0.5rem;
+  --border-radius-lg: 0.75rem;
+  --border-radius-full: 9999px;
+
+  /* Shadows updated for a warmer, less harsh feel */
+  --shadow-sm: 0 1px 2px 0 rgba(44, 37, 25, 0.07);
+  --shadow-md: 0 4px 6px -1px rgba(44, 37, 25, 0.1), 0 2px 4px -1px rgba(44, 37, 25, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(44, 37, 25, 0.1), 0 4px 6px -2px rgba(44, 37, 25, 0.05);
+
+  /* ⏱️ TRANSITIONS */
+  --transition-duration: 200ms;
+  --transition-timing: ease-in-out;
+
+  /* CANVAS */
+  --branch-color: var(--clr-text-secondary);
+  --shadow-color: var(--clr-text-muted);
+}
+
+[data-theme="dark"] {
+  /* Backgrounds -- Inspired by the 'Field Guide' cover */
+  --clr-bg-primary: #1a2e44;
+  --clr-bg-secondary: #2c435a;
+  --clr-bg-tertiary: #415a75;
+
+  /* Text -- High contrast against the dark blue */
+  --clr-text-primary: #f4ede0;
+  --clr-text-secondary: #CCCCCC;
+  --clr-text-muted: #9baec1;
+
+  /* Borders */
+  --clr-border: #4d6e8c;
+
+  /* ✨ OVERRIDE for the shadow color in dark mode */
+  --shadow-color-rgb: 0, 0, 0;
+  /* A pure black shadow works best on dark backgrounds */
+
+  /* Accent overrides for better contrast in dark mode */
+  --clr-accent-secondary: #74a87c;
+  --clr-accent-success: #74a87c;
+  --clr-accent-danger: #c75454;
+
+  /* Shadows for dark mode */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.25), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.25), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+
+  /* CANVAS */
+  --branch-color: var(--clr-text-secondary);
+  --shadow-color: var(--clr-text-muted);
+}
+
+html,
+body,
+#__nuxt {
+  margin: 0;
+}
+
+body {
+  font-family: var(--font-family-sans);
+  background-color: var(--clr-bg-primary);
+  color: var(--clr-text-secondary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.content-wrapper {
+  display: flex;
+  height: 90vh;
+  margin-right: 3rem;
+  /* width: 80px;
+  height: 80px;
+  border-radius:45%; */
+  background-color: var(--clr-bg-secondary);
+  border-radius: 30%;
+  border: 0.1rem solid var(--clr-border);
+  box-shadow: var(--shadow-lg);
+  overflow: auto;
+  corner-shape: scoop;
+  transition: 1.8s all ease;
+}
+
+.intro-card--pl {
+  padding: var(--spacing-md);
+}
+
+.nav-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 30rem;
+  width: auto;
+
+  a {
+    text-decoration: none;
+    font-size: var(--font-size-base);
+  }
+
+  div {
+    box-shadow: var(--shadow-lg);
+    background-color: var(--clr-bg-primary);
+  }
+}
+
+.infographic-container {
+  width: 99%;
+  height: 99%;
+  border-radius: 0.6rem;
+  border: 0.1rem dashed var(--clr-border);
+  background-color: var(--clr-bg-secondary);
+  corner-shape: bevel;
+  overflow: auto;
+  display: flex;
+  justify-content: flex-start;
+
+  >img {
+    opacity: 0.8;
+  }
+}
+
+.left-column {
+  position: relative;
+  width: 30%;
+  padding: var(--spacing-xl);
+  border-right: 0.1rem solid var(--clr-border);
+  /* box-shadow: inset -8px 0px 10px -14px rgba(var(--shadow-color-rgb), 0.4); */
+  background-color: var(--clr-bg-primary);
+  color: var(--clr-text-primary);
+}
+
+.left-column::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  /* Position it so it spills slightly onto the right page */
+  right: -5px;
+  width: 10px;
+  pointer-events: none;
+  /* Important: ensures text/clicks on the right page work */
+
+  /* The Shadow Gradient - Darkest in the middle, fading out */
+  background: linear-gradient(to right,
+      rgba(var(--shadow-color-rgb), 0),
+      /* Start fully transparent */
+      rgba(var(--shadow-color-rgb), 0.15),
+      /* Darker middle for depth */
+      rgba(var(--shadow-color-rgb), 0)
+      /* End fully transparent */
+    );
+
+  /* --- Advanced Masking for Realistic Crease --- */
+  -webkit-mask-image:
+    /* 1. Main irregular wave: subtle, large-scale unevenness */
+    linear-gradient(to bottom,
+      transparent,
+      black 10%,
+      black 90%,
+      transparent),
+    /* 2. Smaller scale noise/crumple: adds subtle texture along the edge */
+    repeating-linear-gradient(45deg,
+      transparent 0 1px,
+      black 1px 2px,
+      transparent 2px 3px,
+      black 3px 4px),
+    repeating-linear-gradient(-45deg,
+      transparent 0 1px,
+      black 1px 2px,
+      transparent 2px 3px,
+      black 3px 4px);
+
+  /* Mask size and position for fine control */
+  -webkit-mask-size:
+    100% 100%,
+    /* Size of the main irregular wave */
+    100% 20px,
+    /* Height of the noise layer 1 */
+    100% 20px;
+  /* Height of the noise layer 2 */
+
+  -webkit-mask-position:
+    0 0,
+    /* Position of the main irregular wave */
+    0 0,
+    /* Position of noise layer 1 */
+    0 10px;
+  /* Offset noise layer 2 slightly for more randomness */
+
+  /* Ensure standard mask properties are also applied */
+  mask-image:
+    linear-gradient(to bottom,
+      transparent,
+      black 10%,
+      black 90%,
+      transparent),
+    repeating-linear-gradient(45deg,
+      transparent 0 1px,
+      black 1px 2px,
+      transparent 2px 3px,
+      black 3px 4px),
+    repeating-linear-gradient(-45deg,
+      transparent 0 1px,
+      black 1px 2px,
+      transparent 2px 3px,
+      black 3px 4px);
+
+  mask-size:
+    100% 100%,
+    100% 20px,
+    100% 20px;
+
+  mask-position:
+    0 0,
+    0 0,
+    0 10px;
+}
+
+.right-column {
+  width: 70%;
+  padding: var(--spacing-xl);
+  box-shadow: -8px 0px 10px -10px rgba(var(--shadow-color-rgb), 0.4);
+  background-color: var(--clr-bg-primary);
+  color: var(--clr-text-primary);
+}
+
+.page-wrapper {
+  display: grid;
+  grid-template-columns: 0.2fr 1fr;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .page-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .content-wrapper {
+    width: 100%;
+    height: 90vh;
+    /* Adjusted to account for nav-wrapper height */
+    margin: 0rem;
+    border-radius: 0;
+    flex-direction: column;
+    corner-shape: none;
+    transition: none;
+  }
+
+  .left-column,
+  .right-column {
+    width: auto;
+    padding: var(--spacing-lg);
+    border-right: none;
+  }
+
+  .nav-wrapper {
+    flex-direction: row;
+    height: 10%;
+    width: 100vw;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: var(--clr-bg-primary);
+
+    .column {
+      width: 100%;
+      flex-direction: row;
+    }
+  }
+}
+
+/* Typography */
+h1,
+h2,
+h3 {
+  font-family: var(--font-family-sans);
+  font-weight: var(--font-weight-bold);
+  color: var(--clr-text-primary);
+}
+
+h1 {
+  font-size: var(--font-size-3xl);
+  margin-bottom: var(--spacing-md);
+}
+
+h2 {
+  font-size: var(--font-size-2xl);
+  margin-bottom: var(--spacing-sm);
+}
+
+p {
+  line-height: 1.6;
+  margin-bottom: var(--spacing-md);
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.center {
+  justify-content: space-between;
+  align-items: center;
+}
+
+h1 {
+  /* Using the accent color for a standout title */
+  color: var(--clr-accent-primary);
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  /* I'd recommend a bold, vintage display font here like 'Oswald' */
+  font-family: 'Oswald', var(--font-family-sans);
+  margin-bottom: var(--spacing-xs);
+}
+
+h2 {
+  /* Using the secondary text color for a softer subtitle */
+  color: var(--clr-text-secondary);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-normal);
+  margin-bottom: var(--spacing-lg);
+}
+
+p {
+  /* Using the primary text color for readability */
+  color: var(--clr-text-primary);
+  font-size: var(--font-size-base);
+  /* For the vintage feel, a serif font like 'Merriweather' works great here */
+  font-family: 'Merriweather', serif;
+  max-width: 50ch;
+  /* Limits line length for better readability */
+  margin: 0 auto;
+  /* Centers the paragraph block */
+}
+
+.dot-mask-background {
+  opacity: 0.1;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPGZpbHRlciBpZD0ic3RyaXBlcyI+CiAgICAgIDxmZVR1cmJ1bGVuY2UgYmFzZUZyZXF1ZW5jeT0iLjEgMCIgc2VlZD0iMTMiLz4KICAgICAgPGZlQ29sb3JNYXRyaXggdmFsdWVzPSIuNjUgLjEgMCAgMCAwCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgLjE1IC40IDAgIDAgMAogICAgICAgICAgICAgICAgICAgICAgICAgICAgIC4wNyAuMSAuMSAwIDAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAwICAgMCAgMCAgMCAxIi8+CiAgICA8L2ZpbHRlcj4KICAgIDxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBwYXR0ZXJuVHJhbnNmb3JtPSJyb3RhdGUoNDUpIj4KICAgICAgPHJlY3Qgd2lkdGg9IjE0MCUiIGhlaWdodD0iMTQwJSIgZmlsdGVyPSJ1cmwoI3N0cmlwZXMpIi8+CiAgICA8L3BhdHRlcm4+CiAgICA8ZmlsdGVyIGlkPSJmaWx0ZXIiPgogICAgICAgIDxmZVR1cmJ1bGVuY2UgdHlwZT0iZnJhY3RhbE5vaXNlIiBiYXNlRnJlcXVlbmN5PSIuMDEiIG51bU9jdGF2ZXM9IjMiLz4KICAgICAgICA8ZmVEaXNwbGFjZW1lbnRNYXAgaW49IlNvdXJjZUdyYXBoaWMiIHNjYWxlPSIyNTAiLz4KICAgIDwvZmlsdGVyPgogICAgPHJlY3QgeD0iLTIwJSIgeT0iLTIwJSIgd2lkdGg9IjE0MCUiIGhlaWdodD0iMTQwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSIgZmlsdGVyPSJ1cmwoI2ZpbHRlcikiLz4KPC9zdmc+");
+}
+
+/* Artistic theme */
+.dot-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* radial-gradient(circle, var(--clr-border) 0.2px, transparent 0.6px); */
+  /* background-size: 20px 20px; */
+  pointer-events: none;
+  z-index: -1;
+}
+
+.intro-card {
+  /* Using your variables for background, text color, and spacing */
+  background-color: var(--clr-bg-secondary);
+  color: var(--clr-text-primary);
+  padding: var(--spacing-xl);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--border-radius-lg);
+  text-align: left;
+  corner-shape: bevel;
+  margin-bottom: 1.2rem;
+}
+
+.intro-card--circle {
+  border-radius: 50%;
+  corner-shape: superellipse(0.5);
+  height: 0.1rem;
+  width: 0.1rem;
+}
+
+/* --- Styling for Individual Links --- */
+.nav-link {
+  position: relative;
+  /* Needed for the active indicator line */
+  text-decoration: none;
+  color: var(--clr-text-secondary);
+  font-size: 1rem;
+  opacity: 0.7;
+  transition: all 0.2s ease-out;
+  /* padding-left: 1rem; Space for the active indicator */
+}
+
+/* --- Recommended Hover Effect --- */
+.nav-link:hover {
+  opacity: 1;
+  color: var(--clr-accent-primary);
+  transform: translateX(1px);
+  /* Gentle nudge to the right */
+}
+
+/* --- Recommended Active State --- */
+.nav-link--active {
+  opacity: 1;
+  font-weight: bold;
+}
+
+/* The decorative line for the active link
+        .nav-link--active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 3px;
+            height: 70%;
+            background-color: var(--clr-bg-primary);
+            border-radius: 3px;
+            transition: all 0.3s ease-in-out;
+        } */
+
+@keyframes scale {
+  to {
+    transform:
+      scale(calc(1.1 - calc(0.1 * var(--reverse-index))));
+  }
+}
+
+@supports (animation-timeline: view()) {
+  #cards {
+    --numcards: 4;
+    view-timeline-name: --cards-element-scrolls-in-body;
+  }
+
+  /* .scrollable-cards_item_content {
+        --start-range: calc(var(--index0) / var(--numcards) * 100%);
+        --end-range: calc((var(--index)) / var(--numcards) * 100%);
+        animation: linear scale forwards;
+        animation-timeline: --cards-element-scrolls-in-body;
+        animation-range: exit-crossing var(--start-range) exit-crossing var(--end-range);
+    } */
+}
+
+@view-transition {
+  navigation: auto;
+}
