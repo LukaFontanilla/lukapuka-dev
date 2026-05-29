@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@nuxt/content',
     '@nuxtjs/mdc',
+    '@vercel/analytics',
   ],
   css: ['~/assets/css/main.css'],
   mdc: {
