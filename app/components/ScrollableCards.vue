@@ -3,36 +3,46 @@
 
 <template>
     <div class="cards">
-        <div class="card intro-card">html</div>
-        <div class="card intro-card">&lt;base&gt;</div>
-        <div class="card intro-card">&lt;head&gt;</div>
-        <div class="card intro-card">&lt;link&gt;</div>
-        <div class="card intro-card">&lt;meta&gt;</div>
-        <div class="card intro-card">&lt;script&gt;</div>
-        <div class="card intro-card">&lt;style&gt;</div>
-        <div class="card intro-card">&lt;title&gt;</div>
-        <div class="card intro-card">&lt;body&gt;</div>
-        <div class="card intro-card">&lt;address&gt;</div>
-        <div class="card intro-card">&lt;article&gt;</div>
-        <div class="card intro-card">&lt;aside&gt;</div>
-        <div class="card intro-card">&lt;footer&gt;</div>
-        <div class="card intro-card">&lt;header&gt;</div>
-        <div class="card intro-card">&lt;h1&gt;</div>
-        <div class="card intro-card">&lt;article&gt;</div>
-        <div class="card intro-card">&lt;aside&gt;</div>
-        <div class="card intro-card">&lt;footer&gt;</div>
-        <div class="card intro-card">&lt;header&gt;</div>
-        <div class="card intro-card">&lt;h1&gt;</div>
+        <div class="card intro-card clickable">Bar Chart</div>
+        <div class="card intro-card clickable">Line Chart</div>
+        <div class="card intro-card clickable">Scatter Plot</div>
+        <div class="card intro-card clickable">Heatmap</div>
+        <div class="card intro-card clickable">Treemap</div>
+        <div class="card intro-card clickable">Network</div>
+        <div class="card intro-card clickable">Choropleth</div>
+        <div class="card intro-card clickable">Radar</div>
+        <div class="card intro-card clickable">Box Plot</div>
+        <div class="card intro-card clickable">Violin</div>
+        <div class="card intro-card clickable">Bubble</div>
+        <div class="card intro-card clickable">Sunburst</div>
+        <div class="card intro-card clickable">Sankey</div>
+        <div class="card intro-card clickable">Word Cloud</div>
+        <div class="card intro-card clickable">Parallel</div>
+        <div class="card intro-card clickable">Streamgraph</div>
+        <div class="card intro-card clickable">Waffle</div>
+        <div class="card intro-card clickable">Beeswarm</div>
+        <div class="card intro-card clickable">Dendrogram</div>
+        <div class="card intro-card clickable">Voronoi</div>
     </div>
 </template>
 
 <style scoped>
 .cards {
     display: grid;
-    gap: 1rem;
+    gap: 0.25rem;
     grid-auto-flow: dense;
-    grid-template-columns: repeat(3, 30%);
+    grid-template-columns: repeat(3, 1fr);
     height: 100%;
+}
+
+.clickable {
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.clickable:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 @keyframes slide-fade-in {
@@ -55,17 +65,20 @@
     &>.card {
         display: grid;
         place-content: center;
-        grid-row: span 3;
+        grid-row: span 6;
+        padding: 0.6rem;
+        text-align: center;
+        font-size: 1rem;
 
-        &:nth-of-type(4n) {
-            grid-row: span 4;
-        }
-
-        &:nth-of-type(7n) {
-            grid-row: span 5;
+        &:nth-of-type(3n) {
+            grid-row: span 8;
         }
 
         &:nth-of-type(5n) {
+            grid-row: span 10;
+        }
+
+        &:nth-of-type(4n) {
             grid-column: span 2;
         }
     }

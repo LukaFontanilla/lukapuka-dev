@@ -1,19 +1,18 @@
 <script setup lang="ts">
-const slug = useRoute().path
-const { data } = await useAsyncData(() => queryCollection('content').path(slug).first())
+const route = useRoute()
+const slug = route.params.slug as string
+const { data } = await useAsyncData(() => queryCollection('content').path(`/readings/${slug}`).first())
 
 useSeoMeta({
-  title: () => data.value?.title || 'Writing Entry',
-  ogTitle: () => data.value?.title ? `${data.value.title} - Writings` : 'Writings',
-  description: () => data.value?.description || 'Article in Luka\'s Field Guide.',
-  ogDescription: () => data.value?.description || 'Article in Luka\'s Field Guide.',
+  title: () => data.value?.title || 'Reading Entry',
+  ogTitle: () => data.value?.title ? `${data.value.title} - Reading Log` : 'Reading Log',
+  description: () => data.value?.description || 'Reading log entry in Luka\'s Field Guide.',
+  ogDescription: () => data.value?.description || 'Reading log entry in Luka\'s Field Guide.',
   ogImage: '/field_guide_stag.png',
   twitterCard: 'summary_large_image',
   ogType: 'article'
 })
-
 </script>
-
 
 <template>
   <div class="article-container">
@@ -21,6 +20,7 @@ useSeoMeta({
       <header class="article-header">
         <div class="eyebrow">{{ data.date }}</div>
         <h1 class="article-title">{{ data.title }}</h1>
+        <h2 class="article-subtitle">by {{ data.subtitle }}</h2>
         <div class="tags">
           <span v-for="tag in data.tags" :key="tag" class="tag">{{ tag }}</span>
         </div>
@@ -30,7 +30,7 @@ useSeoMeta({
         <ContentRenderer :value="data" />
       </div>
     </div>
-    <div v-else class="error-msg">Content not found</div>
+    <div v-else class="error-msg">Reading log not found</div>
   </div>
 </template>
 
@@ -66,7 +66,15 @@ useSeoMeta({
   font-family: 'Oswald', var(--font-family-sans);
   font-size: 2.5rem;
   color: var(--clr-accent-primary);
-  margin: 0.5rem 0;
+  margin: 0.5rem 0 0.25rem 0;
+}
+
+.article-subtitle {
+  font-family: 'Merriweather', serif;
+  font-size: 1.2rem;
+  color: var(--clr-text-secondary);
+  font-style: italic;
+  margin-bottom: 0.5rem;
 }
 
 .tags {
