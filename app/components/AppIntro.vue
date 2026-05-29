@@ -969,4 +969,22 @@ details:not([open]) .section-header::after {
   font-size: 0.65rem;
   color: var(--clr-text-secondary);
 }
+
+@media (max-width: 1100px) {
+  .column {
+    height: auto !important;
+  }
+
+  .sidebar-scroll-content {
+    flex: none !important;
+    height: auto !important;
+    overflow-y: visible !important;
+  }
+
+  .project-layout-cards {
+    max-height: none !important;
+    overflow-y: visible !important;
+    padding-bottom: var(--spacing-md) !important;
+  }
+}
 </style>

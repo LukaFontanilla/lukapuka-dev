@@ -58,11 +58,11 @@ const updateCollapsedState = (e: MediaQueryListEvent | MediaQueryList) => {
 }
 
 onMounted(() => {
-    setTimeout(() => {
-        if (wrapperEl.value) {
-            wrapperEl.value.style.borderRadius = "1.2rem";
-        }
-    }, 2000);
+    // setTimeout(() => {
+    //     if (wrapperEl.value) {
+    //         wrapperEl.value.style.borderRadius = "1.2rem";
+    //     }
+    // }, 2000);
 
     mediaQuery = window.matchMedia('(max-width: 1100px)')
     isCollapsed.value = mediaQuery.matches
@@ -214,10 +214,46 @@ onUnmounted(() => {
   user-select: none;
 }
 
-.content-wrapper {
-  width: 1200px !important;
-  max-width: 90vw;
-  margin-right: 0 !important; /* Remove margin that shifts it */
+@media (max-width: 768px) {
+  .top-nav {
+    gap: 1rem;
+    padding: 0.4rem 0.8rem;
+    width: 90%;
+    justify-content: center;
+  }
+  
+  .nav-tag {
+    display: none;
+  }
+  
+  .nav-links {
+    gap: 0.8rem;
+  }
+  
+  .nav-bullet {
+    font-size: 0.9rem;
+  }
+  
+  .nav-link {
+    font-size: 0.9rem;
+  }
+}
+
+@media (min-width: 1101px) {
+  .content-wrapper {
+    width: 1200px !important;
+    max-width: 90vw;
+    margin-right: 0 !important; /* Remove margin that shifts it */
+  }
+}
+
+@media (max-width: 1100px) {
+  .content-wrapper {
+    width: 100% !important;
+    max-width: 100vw !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+  }
 }
 
 .infographic-container {

@@ -138,12 +138,12 @@ body {
   height: 80px;
   border-radius:45%; */
   background-color: var(--clr-bg-secondary);
-  border-radius: 30%;
+  border-radius: 1.2rem;
   border: 0.1rem solid var(--clr-border);
   box-shadow: var(--shadow-lg);
   overflow: auto;
   corner-shape: scoop;
-  transition: 1.8s all ease;
+  /* transition: 1.8s all ease; */
 }
 
 .intro-card--pl {
