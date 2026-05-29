@@ -58,12 +58,6 @@ const updateCollapsedState = (e: MediaQueryListEvent | MediaQueryList) => {
 }
 
 onMounted(() => {
-    // setTimeout(() => {
-    //     if (wrapperEl.value) {
-    //         wrapperEl.value.style.borderRadius = "1.2rem";
-    //     }
-    // }, 2000);
-
     mediaQuery = window.matchMedia('(max-width: 1100px)')
     isCollapsed.value = mediaQuery.matches
     mediaQuery.addEventListener('change', updateCollapsedState)
