@@ -1,6 +1,12 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
 
+useHead({
+  titleTemplate: (titleChunk) => {
+    return titleChunk ? `${titleChunk} - Luka's Field Guide` : "Luka's Field Guide - Design & Development Portfolio"
+  }
+})
+
 onMounted(() => {
   const getTheme = () => {
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
@@ -21,9 +27,7 @@ onMounted(() => {
 <template>
   <div>
     <NuxtLayout>
-      <div>
         <NuxtPage />
-      </div>
     </NuxtLayout>
   </div>
 </template>

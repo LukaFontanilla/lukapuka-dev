@@ -52,15 +52,15 @@ function buildParquetFilter(userFilter: Record<string, any> | undefined) {
   return queryFilter;
 }
 
-export function useFetchParquetData() {
-  const data = ref<any[] | null>(null);
-  const error = ref<Error | null>(null);
-  const loading = ref(false);
-  const metadata = ref<any | null>(null);
+// Client-side only non-serializable cache to prevent redundant network fetching and serialization overhead
+let cachedFileBuffer: any = null;
+let cachedLastUrl: string | null = null;
 
-  // --- Caching state ---
-  const lastUrl = ref<string | null>(null);
-  const fileBuffer = ref<any | null>(null);
+export function useFetchParquetData() {
+  const data = useState<any[] | null>('parquet:data', () => null);
+  const error = useState<Error | null>('parquet:error', () => null);
+  const loading = useState<boolean>('parquet:loading', () => false);
+  const metadata = useState<any | null>('parquet:metadata', () => null);
 
   const fetchData = async (options: FetchParquetDataOptions) => {
     const { url, rowStart, rowEnd, filter: userFilter } = options;
@@ -77,12 +77,12 @@ export function useFetchParquetData() {
       } = await import('https://cdn.jsdelivr.net/npm/hyparquet@1.20.1/+esm');
 
       // Check if URL has changed or if we don't have a file buffer
-      if (url !== lastUrl.value || !fileBuffer.value) {
+      if (url !== cachedLastUrl || !cachedFileBuffer) {
         // 1. Fetch file and store it
-        fileBuffer.value = await asyncBufferFromUrl({ url });
+        cachedFileBuffer = await asyncBufferFromUrl({ url });
 
         // 2. Fetch and store metadata
-        const md = await parquetMetadataAsync(fileBuffer.value);
+        const md = await parquetMetadataAsync(cachedFileBuffer);
         const schema = parquetSchema(md);
         metadata.value = {
           numRows: Number(md.num_rows),
@@ -92,10 +92,10 @@ export function useFetchParquetData() {
         };
 
         // 3. Update the last processed URL
-        lastUrl.value = url;
+        cachedLastUrl = url;
       }
 
-      const file = fileBuffer.value;
+      const file = cachedFileBuffer;
       const filter = buildParquetFilter(userFilter);
 
       if (filter) {
@@ -122,3 +122,4 @@ export function useFetchParquetData() {
     fetchData,
   };
 }
+
