@@ -270,12 +270,20 @@ watchEffect(() => console.log(data.value, loading.value))
                 <div class="organic-list">
                     <details class="list-section" :open="activeSection === 'index'">
                         <summary class="section-header" @click="toggleSection('index', $event)">VISUAL INDEX</summary>
-                        <div class="list-content viz-list-scroll">
-                            <div v-for="group in vizGroups" :key="group.name" class="viz-group">
-                                <div class="group-header">{{ group.name }}</div>
-                                <div v-for="item in group.items" :key="item.slug" class="list-item">
-                                    <span class="item-icon">{{ item.glyph }}</span>
-                                    <NuxtLink :to="`/visualizations/${item.slug}`" class="item-link">{{ item.name }}</NuxtLink>
+                        <div class="list-content">
+                            <div class="wip-banner">
+                                <div class="wip-badge">WIP</div>
+                                <div class="wip-title">Visual Index</div>
+                                <div class="wip-desc">An interactive catalog of infographics, custom charts, and topological diagrams.</div>
+                                <div class="wip-grid">
+                                    <div class="wip-grid-item">
+                                        <span>STATUS</span>
+                                        <span>DRAFTING</span>
+                                    </div>
+                                    <div class="wip-grid-item">
+                                        <span>PHASE</span>
+                                        <span>01 / 03</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -284,17 +292,20 @@ watchEffect(() => console.log(data.value, loading.value))
                     <details class="list-section" style="margin-top: 1rem;" :open="activeSection === 'sites'">
                         <summary class="section-header" @click="toggleSection('sites', $event)">OTHER SITES</summary>
                         <div class="list-content">
-                            <div class="list-item">
-                                <span class="item-icon">💧</span>
-                                <a href="#" class="item-link">Visualizations Hub</a>
-                            </div>
-                            <div class="list-item">
-                                <span class="item-icon">🌙</span>
-                                <a href="#" class="item-link">Design System</a>
-                            </div>
-                            <div class="list-item">
-                                <span class="item-icon">👁</span>
-                                <a href="#" class="item-link">Creative Writing</a>
+                            <div class="wip-banner">
+                                <div class="wip-badge">WIP</div>
+                                <div class="wip-title">External Hubs</div>
+                                <div class="wip-desc">A collection of other related personal projects, blogs, and digital portfolios currently under development.</div>
+                                <div class="wip-grid">
+                                    <div class="wip-grid-item">
+                                        <span>STATUS</span>
+                                        <span>DRAFTING</span>
+                                    </div>
+                                    <div class="wip-grid-item">
+                                        <span>PHASE</span>
+                                        <span>01 / 03</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </details>
@@ -870,5 +881,92 @@ details:not([open]) .section-header::after {
 
 .view-all-row:hover .project-link-wrapper {
   color: var(--clr-accent-primary) !important;
+}
+
+/* --- WIP / COMING SOON PLACEHOLDERS --- */
+.wip-banner {
+  padding: var(--spacing-md);
+  background-color: var(--clr-bg-primary);
+  border: 1px dashed var(--clr-border);
+  border-radius: var(--border-radius-sm);
+  font-family: var(--font-family-mono);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  position: relative;
+  overflow: hidden;
+  margin-top: var(--spacing-xs);
+}
+
+.wip-banner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background-color: var(--clr-accent-primary);
+}
+
+.wip-badge {
+  display: inline-block;
+  font-size: 0.62rem;
+  font-weight: bold;
+  color: var(--clr-accent-primary);
+  border: 1px solid var(--clr-accent-primary);
+  padding: 1px 5px;
+  border-radius: var(--border-radius-sm);
+  width: fit-content;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background-color: rgba(217, 111, 46, 0.05);
+}
+
+.wip-badge--standby {
+  color: var(--clr-text-muted);
+  border-color: var(--clr-border);
+  background-color: rgba(141, 155, 169, 0.05);
+}
+
+.wip-title {
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: var(--clr-text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.wip-desc {
+  font-size: 0.72rem;
+  color: var(--clr-text-secondary);
+  line-height: 1.4;
+  font-family: var(--font-family-sans);
+}
+
+.wip-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-sm);
+  border-top: 1px dotted var(--clr-border);
+  padding-top: var(--spacing-sm);
+  margin-top: var(--spacing-xs);
+}
+
+.wip-grid-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.wip-grid-item span:first-child {
+  font-size: 0.58rem;
+  color: var(--clr-text-muted);
+  font-weight: bold;
+  letter-spacing: 0.05em;
+}
+
+.wip-grid-item span:last-child {
+  font-size: 0.65rem;
+  color: var(--clr-text-secondary);
 }
 </style>
