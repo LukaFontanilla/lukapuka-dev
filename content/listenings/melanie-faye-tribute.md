@@ -4,7 +4,6 @@ subtitle: "Melanie Faye"
 description: "An incredible soulful guitar tribute to two icons of American music."
 type: "live performance"
 youtubeId: "jH9aEI8mSJE"
-date: "2026-02-10"
 tags: ["Blues", "Soul", "R&B", "Electric Guitar"]
 ---
 

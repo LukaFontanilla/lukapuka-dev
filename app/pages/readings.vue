@@ -1,10 +1,21 @@
 <script setup lang="ts">
-// Mock data for readings with tags
-const books = [
-  { title: 'The Overstory', subtitle: 'Richard Powers', date: '2026-01-15', description: 'A beautiful exploration of trees and human connection.', tags: ['Fiction', 'Ecology'] },
-  { title: 'Silent Spring', subtitle: 'Rachel Carson', date: '2025-11-20', description: 'Foundational text for the environmental movement.', tags: ['Non-Fiction', 'Ecology'] },
-  { title: 'Braiding Sweetgrass', subtitle: 'Robin Wall Kimmerer', date: '2025-09-05', description: 'Indigenous wisdom and scientific knowledge combined.', tags: ['Non-Fiction', 'Culture'] },
-]
+const { data: rawReadings } = await useAsyncData('readings', () =>
+  queryCollection('content').where('path', 'like', '/readings/%').all()
+)
+
+const books = computed(() => {
+  const list = rawReadings.value || []
+  return list
+    .map(item => ({
+      path: item.path,
+      title: item.title || 'Untitled',
+      subtitle: item.subtitle || '',
+      date: item.date || '',
+      description: item.description || '',
+      tags: Array.isArray(item.tags) ? item.tags : []
+    }))
+    .sort((a, b) => (b.date || '').localeCompare(a.date || ''))
+})
 
 useSeoMeta({
   title: 'Reading Log',

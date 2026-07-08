@@ -27,8 +27,6 @@ const handleClick = () => {
     webWorker.value.postMessage(JSON.stringify(message))
 }
 
-const { data, error, loading, metadata, fetchData } = useFetchParquetData();
-
 const projects = ref([
     { name: 'MCP Toolbox for Databases', category: 'mcp', link: 'https://github.com/googleapis/mcp-toolbox' },
     { name: 'Looker Agents in Gemini Enterprise', category: 'agents', link: 'https://github.com/lkrdev/looker-oauth-gemini-enterprise' },
@@ -150,15 +148,7 @@ onMounted(() => {
             cardsContainer.scrollLeft += scrollAmount;
         });
     }
-
-    fetchData({
-        url: 'https://hyperparam-public.s3.amazonaws.com/wiki-en-00000-of-00041.parquet',
-        rowStart: 0,
-        rowEnd: 1000
-    });
 });
-
-watchEffect(() => console.log(data.value, loading.value))
 </script>
 
 <template>

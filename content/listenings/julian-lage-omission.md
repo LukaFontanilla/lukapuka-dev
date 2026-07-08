@@ -4,7 +4,6 @@ subtitle: "Julian Lage"
 description: ""
 type: "live performance"
 youtubeId: "Ykfhn1gAzzc"
-date: "2025-12-14"
 tags: ["Acoustic", "Instrumental", "Solo Guitar"]
 ---
 

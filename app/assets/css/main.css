@@ -1,4 +1,5 @@
 :root {
+  color-scheme: light;
   /* 🎨 COLOR PALETTE */
   /* Used for main backgrounds -- Inspired by the 'Park Map' paper */
   --clr-bg-primary: #f4ede0;
@@ -11,7 +12,7 @@
   --clr-text-muted: #8d9ba9;
 
   /* Used for accents and interactive elements */
-  --clr-accent-primary: #d96f2e;
+  --clr-accent-primary: #b8541a;
   /* Vibrant orange from 'FIELD GUIDE' text */
   --clr-accent-secondary: #588157;
   /* Forest green from map trees */
@@ -77,6 +78,7 @@
 }
 
 [data-theme="dark"] {
+  color-scheme: dark;
   /* Backgrounds -- Inspired by the 'Field Guide' cover */
   --clr-bg-primary: #1a2e44;
   --clr-bg-secondary: #2c435a;
@@ -95,6 +97,7 @@
   /* A pure black shadow works best on dark backgrounds */
 
   /* Accent overrides for better contrast in dark mode */
+  --clr-accent-primary: #eb8c50;
   --clr-accent-secondary: #74a87c;
   --clr-accent-success: #74a87c;
   --clr-accent-danger: #c75454;
@@ -175,7 +178,7 @@ body {
   border: 0.1rem dashed var(--clr-border);
   background-color: var(--clr-bg-secondary);
   corner-shape: bevel;
-  overflow: auto;
+  overflow: hidden;
   display: flex;
   justify-content: flex-start;
 
@@ -306,24 +309,28 @@ body {
 @media (max-width: 1100px) {
   .page-wrapper {
     grid-template-columns: 1fr;
+    height: 100vh;
+    overflow: hidden;
   }
 
   .content-wrapper {
     width: 100%;
-    height: 90vh;
-    /* Adjusted to account for nav-wrapper height */
-    margin: 0rem;
+    height: calc(100vh - 64px);
+    margin: 0;
     border-radius: 0;
     flex-direction: column;
     corner-shape: none;
     transition: none;
+    border: none;
+    box-shadow: none;
   }
 
   .left-column,
   .right-column {
-    width: auto;
+    width: 100%;
     padding: var(--spacing-lg);
     border-right: none;
+    box-shadow: none;
   }
 
   .nav-wrapper {
@@ -339,6 +346,25 @@ body {
       width: 100%;
       flex-direction: row;
     }
+  }
+}
+
+@media (max-width: 768px) {
+  .left-column,
+  .right-column,
+  .unified-card,
+  .ledger-card,
+  .intro-card,
+  .article-card {
+    padding: 0.85rem !important;
+  }
+
+  .article-container {
+    padding: 0.35rem !important;
+  }
+
+  .content-wrapper {
+    height: calc(100vh - 56px);
   }
 }
 
@@ -405,6 +431,17 @@ p {
   /* Limits line length for better readability */
   margin: 0 auto;
   /* Centers the paragraph block */
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag {
+  max-width: 100%;
+  word-break: break-word;
 }
 
 .dot-mask-background {
@@ -690,4 +727,38 @@ p {
 }
 @view-transition {
   navigation: auto;
+}
+
+/* ==========================================================================
+   FIELD GUIDE SCROLLBAR SYSTEM (DRAFTING RULER)
+   ========================================================================== */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--clr-border) var(--clr-bg-primary);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--clr-bg-primary);
+  border-left: 1px dashed var(--clr-border);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--clr-border);
+  border-radius: 9999px;
+  border: 2px solid var(--clr-bg-primary);
+  background-clip: content-box;
+  transition: background-color 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--clr-accent-primary);
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
 }

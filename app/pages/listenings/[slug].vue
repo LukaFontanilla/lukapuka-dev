@@ -32,7 +32,6 @@ useSeoMeta({
 
       <header class="article-header">
         <div class="eyebrow-row">
-          <span class="eyebrow-date">{{ data.date }}</span>
           <span class="eyebrow-type"
             >RECORDING TYPE: {{ data.type || "observation" }}</span
           >
@@ -104,6 +103,8 @@ useSeoMeta({
 <style scoped>
 .article-container {
   padding: var(--spacing-xl);
+  width: 100%;
+  box-sizing: border-box;
   display: flex;
   justify-content: center;
 }
@@ -113,8 +114,8 @@ useSeoMeta({
   border: 1px solid var(--clr-border);
   padding: var(--spacing-xl);
   border-radius: var(--border-radius-lg);
-  max-width: 760px;
   width: 100%;
+  box-sizing: border-box;
   box-shadow: var(--shadow-md);
 }
 
@@ -473,5 +474,25 @@ useSeoMeta({
 .error-back:hover {
   color: var(--clr-accent-primary);
   border-color: var(--clr-accent-primary);
+}
+
+@media (max-width: 768px) {
+  .article-container {
+    padding: var(--spacing-xs) !important;
+  }
+
+  .article-card {
+    padding: 0.85rem !important;
+    border-radius: var(--border-radius-md);
+  }
+
+  .article-title {
+    font-size: 1.55rem;
+    line-height: 1.25;
+  }
+
+  .article-subtitle {
+    font-size: 0.95rem;
+  }
 }
 </style>

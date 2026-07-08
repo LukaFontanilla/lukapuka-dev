@@ -105,46 +105,46 @@ useSeoMeta({
         <span>NO. 080</span>
       </div>
 
-      <table class="ledger-table">
-        <thead>
-          <tr>
-            <th style="width: 15%">DATE</th>
-            <th style="width: 65%">IDENTITY & NOTES</th>
-            <th style="width: 20%">RECORDING TYPE</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            v-for="item in filteredItems"
-            :key="item.title"
-            class="ledger-row"
-          >
-            <td class="mono-font">{{ item.date }}</td>
-            <td>
-              <NuxtLink :to="item.path" class="ledger-link">
-                <span class="specimen-title">{{ item.title }}</span>
-              </NuxtLink>
-              <span class="specimen-sub"
-                >by {{ item.subtitle || "Unknown Artist" }}</span
-              >
-              <p class="specimen-desc">{{ item.description }}</p>
-              <div class="specimen-tags">
-                <span v-for="tag in item.tags" :key="tag" class="mini-tag"
-                  >#{{ tag }}</span
+      <div class="table-container">
+        <table class="ledger-table">
+          <thead>
+            <tr>
+              <th style="width: 75%">IDENTITY & NOTES</th>
+              <th style="width: 25%">RECORDING TYPE</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              v-for="item in filteredItems"
+              :key="item.title"
+              class="ledger-row"
+            >
+              <td>
+                <NuxtLink :to="item.path" class="ledger-link">
+                  <span class="specimen-title">{{ item.title }}</span>
+                </NuxtLink>
+                <span class="specimen-sub"
+                  >by {{ item.subtitle || "Unknown Artist" }}</span
                 >
-              </div>
-            </td>
-            <td>
-              <span class="stamp-badge" :class="getBadgeColor(item.type || '')">
-                {{ item.type || "Specimen" }}
-              </span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+                <p class="specimen-desc">{{ item.description }}</p>
+                <div class="specimen-tags">
+                  <span v-for="tag in item.tags" :key="tag" class="mini-tag"
+                    >#{{ tag }}</span
+                  >
+                </div>
+              </td>
+              <td>
+                <span class="stamp-badge" :class="getBadgeColor(item.type || '')">
+                  {{ item.type || "Specimen" }}
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
 
-      <div v-if="filteredItems.length === 0" class="no-signals">
-        <span>[!] NO OBSERVATION SIGNALS DETECTED IN THIS BANDWIDTH</span>
+        <div v-if="filteredItems.length === 0" class="no-signals">
+          <span>[!] NO OBSERVATION SIGNALS DETECTED IN THIS BANDWIDTH</span>
+        </div>
       </div>
     </div>
   </div>
@@ -157,6 +157,11 @@ useSeoMeta({
   position: relative;
   z-index: 1;
   animation: fadeIn 0.4s ease;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 /* --- Header --- */
@@ -167,6 +172,7 @@ useSeoMeta({
   margin-bottom: var(--spacing-lg);
   border-bottom: 1px dotted var(--clr-border);
   padding-bottom: var(--spacing-sm);
+  flex-shrink: 0;
 }
 
 .log-title {
@@ -185,6 +191,7 @@ useSeoMeta({
   padding: var(--spacing-md);
   margin-bottom: var(--spacing-lg);
   border-radius: var(--border-radius-sm);
+  flex-shrink: 0;
 }
 
 .legend-header {
@@ -302,6 +309,11 @@ useSeoMeta({
   padding: var(--spacing-xl);
   box-shadow: var(--shadow-md);
   border-radius: var(--border-radius-md);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .card-header {
@@ -313,6 +325,14 @@ useSeoMeta({
   border-bottom: 2px solid var(--clr-border);
   padding-bottom: var(--spacing-sm);
   margin-bottom: var(--spacing-md);
+  flex-shrink: 0;
+}
+
+.table-container {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: auto;
 }
 
 .ledger-table {
@@ -331,6 +351,11 @@ useSeoMeta({
   font-family: var(--font-family-mono);
   font-size: var(--font-size-sm);
   color: var(--clr-text-secondary);
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background-color: var(--clr-bg-primary);
+  box-shadow: inset 0 -1px 0 var(--clr-border);
 }
 
 .ledger-row {
@@ -448,6 +473,48 @@ useSeoMeta({
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .ledger-layout {
+    padding: var(--spacing-sm);
+  }
+
+  .legend-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+  }
+
+  .search-box {
+    width: 100%;
+  }
+
+  .search-input {
+    flex: 1;
+  }
+
+  .ledger-card {
+    padding: var(--spacing-md);
+  }
+
+  .ledger-table th,
+  .ledger-table td {
+    padding: var(--spacing-sm);
+  }
+
+  .specimen-title {
+    font-size: 0.95rem;
+  }
+
+  .stamp-badge {
+    font-size: 0.65rem;
+    padding: 3px 6px;
+  }
+
+  .table-container {
+    padding-bottom: 2.5rem !important;
   }
 }
 </style>

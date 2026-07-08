@@ -4,7 +4,6 @@ subtitle: "Luiz Bonfá"
 description: "A beautiful piece by a legendary Brazilian guitarist and composer well known for his work on the film 'Black Orpheus' and Bossa Nova influential tracks."
 type: "song"
 youtubeId: "yixoZEO8JUc"
-date: "2025-01-01"
 tags: ["Song", "Instrumental", "Classical Guitar"]
 ---
 

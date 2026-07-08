@@ -247,27 +247,27 @@ onUnmounted(() => {
 
 @keyframes round-circle {
   0% {
-    padding-left: 0;
+    transform: translateX(0);
     opacity: 0.8;
     filter: blur(0.2px);
   }
   12% {
-    padding-left: 0;
+    transform: translateX(0);
     opacity: 0.8;
     filter: blur(0.5px);
   }
   50% {
-    padding-left: 2rem; /* Generous shift to completely clear the 120px lens with beautiful breathing room */
+    transform: translateX(2rem); /* Generous shift to clear the lens without causing layout shifts */
     opacity: 1;
     filter: blur(0);
   }
   88% {
-    padding-left: 0;
+    transform: translateX(0);
     opacity: 0.8;
     filter: blur(0.5px);
   }
   100% {
-    padding-left: 0;
+    transform: translateX(0);
     opacity: 0.8;
     filter: blur(0.2px);
   }
@@ -339,5 +339,47 @@ onUnmounted(() => {
   );
   pointer-events: none;
   border-radius: 50%;
+}
+
+@media (max-width: 768px) {
+  .cover-page {
+    padding: var(--spacing-sm);
+  }
+
+  .unified-card {
+    height: 100%;
+    max-height: 100%;
+    overflow-y: auto;
+  }
+
+  .unified-header {
+    padding: var(--spacing-sm) var(--spacing-md) 0 var(--spacing-md);
+  }
+
+  .about-author-header {
+    padding: var(--spacing-sm) var(--spacing-md) 0 var(--spacing-md);
+  }
+
+  .scrollable-text-container {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    padding: var(--spacing-xs) var(--spacing-md) var(--spacing-md) var(--spacing-md);
+  }
+
+  .main-title {
+    font-size: 1.65rem;
+  }
+
+  .cover-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .specimen-lens {
+    width: 90px;
+    height: 90px;
+    margin-right: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+  }
 }
 </style>

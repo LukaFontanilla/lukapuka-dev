@@ -114,35 +114,37 @@ function selectTag(tag: string) {
         <span>FIELD LOG</span>
         <span>NO. 001</span>
       </div>
-      <table class="reading-table">
-        <thead>
-          <tr>
-            <th>DATE</th>
-            <th>TITLE & DETAILS</th>
-            <th>TAGS</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="item in filteredItems" :key="item.title">
-            <td class="mono-font">{{ item.date }}</td>
-            <td>
-              <NuxtLink v-if="item.path" :to="item.path" class="item-link">
-                <span class="item-title">{{ item.title }}</span>
-              </NuxtLink>
-              <span v-else class="item-title">{{ item.title }}</span>
-              <span v-if="item.subtitle" class="item-subtitle"> {{ item.subtitle }}</span>
-              <p v-if="item.description" class="item-description">{{ item.description }}</p>
-            </td>
-            <td>
-              <div class="item-tags">
-                <span v-for="tag in item.tags" :key="tag" class="small-tag">{{ tag }}</span>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <div v-if="filteredItems.length === 0" class="no-items">
-        <p>No items found for this topic.</p>
+      <div class="table-container">
+        <table class="reading-table">
+          <thead>
+            <tr>
+              <th>DATE</th>
+              <th>TITLE & DETAILS</th>
+              <th>TAGS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="item in filteredItems" :key="item.title">
+              <td class="mono-font">{{ item.date }}</td>
+              <td>
+                <NuxtLink v-if="item.path" :to="item.path" class="item-link">
+                  <span class="item-title">{{ item.title }}</span>
+                </NuxtLink>
+                <span v-else class="item-title">{{ item.title }}</span>
+                <span v-if="item.subtitle" class="item-subtitle"> {{ item.subtitle }}</span>
+                <p v-if="item.description" class="item-description">{{ item.description }}</p>
+              </td>
+              <td>
+                <div class="item-tags">
+                  <span v-for="tag in item.tags" :key="tag" class="small-tag">{{ tag }}</span>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div v-if="filteredItems.length === 0" class="no-items">
+          <p>No items found for this topic.</p>
+        </div>
       </div>
     </div>
 
@@ -155,6 +157,11 @@ function selectTag(tag: string) {
   font-family: var(--font-family-sans);
   position: relative;
   z-index: 1;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 /* --- Log Header Top --- */
@@ -165,6 +172,7 @@ function selectTag(tag: string) {
   margin-bottom: var(--spacing-lg);
   border-bottom: 1px dotted var(--clr-border);
   padding-bottom: var(--spacing-sm);
+  flex-shrink: 0;
 }
 
 .log-title {
@@ -185,6 +193,7 @@ function selectTag(tag: string) {
   border-radius: var(--border-radius-sm);
   position: relative;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
 }
 
 .legend-header {
@@ -371,6 +380,11 @@ function selectTag(tag: string) {
   padding: var(--spacing-xl);
   box-shadow: var(--shadow-md);
   border-radius: var(--border-radius-md);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .card-header {
@@ -382,6 +396,14 @@ function selectTag(tag: string) {
   border-bottom: 2px solid var(--clr-border);
   padding-bottom: var(--spacing-sm);
   margin-bottom: var(--spacing-md);
+  flex-shrink: 0;
+}
+
+.table-container {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: auto;
 }
 
 .reading-table {
@@ -400,6 +422,11 @@ function selectTag(tag: string) {
   font-family: var(--font-family-mono);
   font-size: var(--font-size-sm);
   color: var(--clr-text-secondary);
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background-color: var(--clr-bg-primary);
+  box-shadow: inset 0 -1px 0 var(--clr-border);
 }
 
 .mono-font {
@@ -453,5 +480,42 @@ function selectTag(tag: string) {
   padding: var(--spacing-xl) 0;
   font-style: italic;
   text-align: center;
+}
+
+@media (max-width: 768px) {
+  .filtered-log {
+    padding: var(--spacing-sm);
+  }
+
+  .log-title {
+    font-size: 1.6rem;
+  }
+
+  .legend-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+  }
+
+  .search-box {
+    width: 100%;
+  }
+
+  .search-input {
+    flex: 1;
+  }
+
+  .ledger-card {
+    padding: var(--spacing-md);
+  }
+
+  .reading-table th,
+  .reading-table td {
+    padding: var(--spacing-sm);
+  }
+
+  .table-container {
+    padding-bottom: 2.5rem !important;
+  }
 }
 </style>
