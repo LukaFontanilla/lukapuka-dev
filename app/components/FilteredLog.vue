@@ -437,10 +437,14 @@ function selectTag(tag: string) {
 .item-link {
   text-decoration: none;
   color: inherit;
+  cursor: pointer;
+  display: inline-block;
 }
 
 .item-link:hover .item-title {
   color: var(--clr-accent-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .item-title {

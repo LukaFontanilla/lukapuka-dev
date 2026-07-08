@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const route = useRoute()
 const slug = route.params.slug as string
-const { data } = await useAsyncData(() => queryCollection('content').path(`/readings/${slug}`).first())
+const { data } = await useAsyncData(route.path, () => queryCollection('content').path(route.path).first())
 
 useSeoMeta({
   title: () => data.value?.title || 'Reading Entry',

@@ -24,6 +24,11 @@ useSeoMeta({
         <div class="tags">
           <span v-for="tag in data.tags" :key="tag" class="tag">{{ tag }}</span>
         </div>
+        <div v-if="data.mediumUrl" class="medium-link-wrapper">
+          <a :href="data.mediumUrl" target="_blank" rel="noopener noreferrer" class="medium-link">
+            Read on Medium ↗
+          </a>
+        </div>
       </header>
       <hr class="style-divider" />
       <div class="article-content">
@@ -85,6 +90,29 @@ useSeoMeta({
   border-radius: 4px;
   max-width: 100%;
   word-break: break-word;
+}
+
+.medium-link-wrapper {
+  margin-top: 0.85rem;
+}
+
+.medium-link {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-family-mono);
+  font-size: 0.8rem;
+  color: var(--clr-accent-primary);
+  text-decoration: none;
+  padding: 0.35rem 0.75rem;
+  background-color: var(--clr-bg-secondary);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--border-radius-sm);
+  transition: border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.medium-link:hover {
+  border-color: var(--clr-accent-primary);
+  color: var(--clr-accent-primary);
 }
 
 .style-divider {

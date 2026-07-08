@@ -3,6 +3,7 @@ title: "ADK 2.0 is 👌🏾"
 description: "Experimenting with the ADK 2.0 Beta Release - Graphs, Dynamic Workflows.."
 date: "MAY 1, 2026"
 tags: ["ADK", "Google", "Agents", "Python"]
+mediumUrl: "https://lukafontanilla.medium.com/adk-2-0-is-d7ea27bcf4ee"
 ---
 
 Took some time to deep dive into the ADK 2.0 Beta Release and here are a few of my favorites.

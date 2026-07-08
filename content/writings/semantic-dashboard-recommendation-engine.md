@@ -11,6 +11,7 @@ tags:
     "Google Cloud",
     "Data Analytics",
   ]
+mediumUrl: "https://lukafontanilla.medium.com/looker-x-bqml-building-a-semantic-dashboard-recommendation-engine-5566ff60206e"
 ---
 
 ## Overview

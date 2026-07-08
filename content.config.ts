@@ -12,7 +12,8 @@ export default defineContentConfig({
         tags: z.array(z.string()),
         type: z.enum(['interview', 'song', 'live performance']).optional(),
         subtitle: z.string().optional(),
-        youtubeId: z.string().optional()
+        youtubeId: z.string().optional(),
+        mediumUrl: z.string().optional()
       })
     })
   }

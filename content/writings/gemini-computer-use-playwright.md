@@ -3,6 +3,7 @@ title: Gemini Computer Use & Playwright
 description: Playwright Browser Tools for LLM use
 date: "FEB 27, 2026"
 tags: ["ADK", "Google", "Agents", "Python", "Computer Use"]
+mediumUrl: "https://lukafontanilla.medium.com/gemini-computer-use-playwright-dc1c41418dbe"
 ---
 
 <TransitionHeader transition="heading-writing-jaja">First Page</TransitionHeader>
