@@ -195,13 +195,25 @@ useSeoMeta({
 /* ==================== 📺 RETRO MEDIA EMBED PLAYER ==================== */
 .player-deck {
   margin: var(--spacing-lg) 0;
-  background-color: #2c3e50;
-  border: 3px solid #1a252f;
+  background-color: var(--clr-bg-secondary);
+  border: 2px solid var(--clr-border);
   border-radius: var(--border-radius-md);
   padding: var(--spacing-md);
   box-shadow:
-    inset 0 2px 8px rgba(0, 0, 0, 0.4),
-    var(--shadow-sm);
+    inset 0 1px 3px rgba(44, 37, 25, 0.08),
+    var(--shadow-md);
+  color: var(--clr-text-primary);
+  transition: background-color var(--transition-duration) var(--transition-timing),
+              border-color var(--transition-duration) var(--transition-timing),
+              box-shadow var(--transition-duration) var(--transition-timing);
+}
+
+[data-theme="dark"] .player-deck {
+  background-color: #1e293b;
+  border: 2px solid #334155;
+  box-shadow:
+    inset 0 2px 8px rgba(0, 0, 0, 0.45),
+    var(--shadow-md);
   color: #ecf0f1;
 }
 
@@ -212,12 +224,12 @@ useSeoMeta({
   margin-bottom: var(--spacing-md);
   font-family: var(--font-family-mono);
   font-size: 0.7rem;
-  border-bottom: 1px solid #34495e;
+  border-bottom: 1px solid var(--clr-border);
   padding-bottom: 8px;
 }
 
 .console-label {
-  color: #bdc3c7;
+  color: var(--clr-text-secondary);
   font-weight: bold;
 }
 
@@ -230,7 +242,7 @@ useSeoMeta({
 
 .switch-side-label {
   font-weight: bold;
-  color: #7f8c8d;
+  color: var(--clr-text-muted);
   transition: color 0.2s;
 }
 
@@ -243,13 +255,13 @@ useSeoMeta({
   position: relative;
   width: 42px;
   height: 20px;
-  background-color: #1a252f;
-  border: 2px solid #34495e;
+  background-color: var(--clr-bg-primary);
+  border: 2px solid var(--clr-border);
   border-radius: 10px;
   cursor: pointer;
   padding: 0;
   outline: none;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
   display: flex;
   align-items: center;
 }
@@ -259,16 +271,16 @@ useSeoMeta({
   left: 2px;
   width: 12px;
   height: 12px;
-  background-color: #bdc3c7;
+  background-color: var(--clr-text-secondary);
   border-radius: 50%;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   transition:
     transform 0.2s ease,
     background-color 0.2s;
 }
 
 .switch-on {
-  background-color: #2c3e50;
+  background-color: var(--clr-bg-secondary);
   border-color: var(--clr-accent-primary);
 }
 
@@ -281,13 +293,21 @@ useSeoMeta({
 /* TV Bezel and CRT Feel */
 .glowing-screen-wrapper {
   background-color: #0f172a;
-  border: 8px solid #1e293b; /* Heavy terminal bezel color */
+  border: 6px solid var(--clr-bg-tertiary);
   border-radius: var(--border-radius-sm);
+  box-shadow:
+    inset 0 0 15px rgba(0, 0, 0, 0.6),
+    var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+  transition: border-color var(--transition-duration) var(--transition-timing);
+}
+
+[data-theme="dark"] .glowing-screen-wrapper {
+  border-color: #0f172a;
   box-shadow:
     inset 0 0 15px rgba(0, 0, 0, 0.9),
     0 0 10px rgba(0, 0, 0, 0.25);
-  position: relative;
-  overflow: hidden;
 }
 
 .video-aspect-ratio {
@@ -315,12 +335,12 @@ useSeoMeta({
   width: 100%;
   height: 100%;
   background:
-    linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+    linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%),
     linear-gradient(
       90deg,
-      rgba(255, 0, 0, 0.06),
+      rgba(255, 0, 0, 0.04),
       rgba(0, 255, 0, 0.02),
-      rgba(0, 0, 255, 0.06)
+      rgba(0, 0, 255, 0.04)
     );
   background-size:
     100% 4px,
@@ -349,10 +369,20 @@ useSeoMeta({
   align-items: center;
   gap: 12px;
   padding: 8px 12px;
-  background-color: #1e293b;
+  background-color: var(--clr-bg-primary);
   font-family: var(--font-family-mono);
-  font-size: 0.65rem;
+  font-size: 0.68rem;
+  border-top: 1px solid var(--clr-border);
+  color: var(--clr-text-primary);
+  transition: background-color var(--transition-duration) var(--transition-timing),
+              border-color var(--transition-duration) var(--transition-timing),
+              color var(--transition-duration) var(--transition-timing);
+}
+
+[data-theme="dark"] .dial-indicator-row {
+  background-color: #1e293b;
   border-top: 1px solid #0f172a;
+  color: #e2e8f0;
 }
 
 .dial-lamp {
@@ -373,6 +403,10 @@ useSeoMeta({
 }
 
 .text-green {
+  color: #2e8b57;
+}
+
+[data-theme="dark"] .text-green {
   color: #2ecc71;
 }
 
@@ -382,18 +416,26 @@ useSeoMeta({
 
 .frequency-badge {
   margin-left: auto;
-  background-color: #0f172a;
-  color: #94a3b8;
+  background-color: var(--clr-bg-secondary);
+  color: var(--clr-text-primary);
   padding: 2px 6px;
   border-radius: 3px;
+  border: 1px solid var(--clr-border);
+  font-weight: var(--font-weight-bold);
+}
+
+[data-theme="dark"] .frequency-badge {
+  background-color: #0f172a;
+  color: #94a3b8;
+  border-color: #334155;
 }
 
 /* Deactivated State */
 .audio-placeholder {
   height: 220px;
-  border: 2px dashed #34495e;
+  border: 2px dashed var(--clr-border);
   border-radius: 4px;
-  background-color: #1a252f;
+  background-color: var(--clr-bg-secondary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -412,7 +454,7 @@ useSeoMeta({
   font-family: var(--font-family-mono);
   font-size: 0.8rem;
   font-weight: bold;
-  color: #e74c3c;
+  color: var(--clr-accent-danger);
   letter-spacing: 0.5px;
 }
 
@@ -420,7 +462,7 @@ useSeoMeta({
   font-family: "Merriweather", serif;
   font-size: 0.75rem;
   font-style: italic;
-  color: #bdc3c7;
+  color: var(--clr-text-muted);
 }
 
 /* ==================== SNIPPET ARTICLE STYLING ==================== */

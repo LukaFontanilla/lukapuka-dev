@@ -131,7 +131,7 @@ function selectTag(tag: string) {
                   <span class="item-title">{{ item.title }}</span>
                 </NuxtLink>
                 <span v-else class="item-title">{{ item.title }}</span>
-                <span v-if="item.subtitle" class="item-subtitle"> {{ item.subtitle }}</span>
+                <span v-if="item.subtitle" class="item-subtitle">— by {{ item.subtitle }}</span>
                 <p v-if="item.description" class="item-description">{{ item.description }}</p>
               </td>
               <td>
@@ -455,6 +455,9 @@ function selectTag(tag: string) {
 .item-subtitle {
   font-size: var(--font-size-sm);
   color: var(--clr-text-secondary);
+  font-style: italic;
+  margin-left: 0.45rem;
+  display: inline-block;
 }
 
 .item-description {

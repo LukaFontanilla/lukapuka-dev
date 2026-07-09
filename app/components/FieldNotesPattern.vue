@@ -1,143 +1,59 @@
 <script setup lang="ts">
-const props = defineProps<{
+defineProps<{
   rotation?: number
 }>()
 </script>
 
 <template>
-  <div class="pattern-background">
-    <svg
-      width="100%"
-      height="100%"
-      viewBox="0 0 800 800"
-      preserveAspectRatio="xMidYMid slice"
-      class="field-notes-svg"
-      opacity="0.35"
-    >
-      <!-- Grid Lines -->
-      <defs>
-        <pattern
-          id="smallGrid"
-          width="20"
-          height="20"
-          patternUnits="userSpaceOnUse"
-        >
-          <path
-            d="M 20 0 L 0 0 0 20"
-            fill="none"
-            stroke="#c0c0b2"
-            stroke-width="0.5"
-          />
-        </pattern>
-        <pattern
-          id="grid"
-          width="100"
-          height="100"
-          patternUnits="userSpaceOnUse"
-        >
-          <rect width="100" height="100" fill="url(#smallGrid)" />
-          <path
-            d="M 100 0 L 0 0 0 100"
-            fill="none"
-            stroke="#c0c0b2"
-            stroke-width="1"
-          />
-        </pattern>
-      </defs>
-
-      <rect width="100%" height="100%" fill="url(#grid)" />
-
-      <!-- Abstract Annotations & Math -->
-      <line
-        x1="50"
-        y1="50"
-        x2="750"
-        y2="50"
-        stroke="#d96f2e"
-        stroke-width="1"
-        stroke-dasharray="5,5"
-      />
-      <text x="60" y="45" font-family="monospace" font-size="12" fill="#d96f2e">
-        DOMAIN EXPANSION: z_{n+1} = z_n^2 + c
-      </text>
-
-      <!-- Fibonacci Squares for Framing -->
-      <rect x="400" y="395" width="5" height="5" fill="none" stroke="#2c3e50" stroke-width="0.5" stroke-dasharray="2,2" />
-      <rect x="400" y="400" width="5" height="5" fill="none" stroke="#2c3e50" stroke-width="0.5" stroke-dasharray="2,2" />
-      <rect x="390" y="395" width="10" height="10" fill="none" stroke="#2c3e50" stroke-width="0.5" stroke-dasharray="2,2" />
-      <rect x="390" y="380" width="15" height="15" fill="none" stroke="#2c3e50" stroke-width="0.5" stroke-dasharray="2,2" />
-      <rect x="405" y="380" width="25" height="25" fill="none" stroke="#2c3e50" stroke-width="0.5" stroke-dasharray="2,2" />
-      <rect x="390" y="405" width="40" height="40" fill="none" stroke="#2c3e50" stroke-width="0.5" stroke-dasharray="2,2" />
-      <rect x="325" y="380" width="65" height="65" fill="none" stroke="#2c3e50" stroke-width="0.5" stroke-dasharray="2,2" />
-      <rect x="325" y="275" width="105" height="105" fill="none" stroke="#2c3e50" stroke-width="0.5" stroke-dasharray="2,2" />
-
-      <!-- Detailed Golden Ratio Spiral -->
-      <path
-        class="spiral-path"
-        d="M 400 400 A 5 5 0 0 1 405 400 A 5 5 0 0 1 405 405 A 10 10 0 0 1 395 405 A 15 15 0 0 1 395 390 A 25 25 0 0 1 420 390 A 40 40 0 0 1 420 430 A 65 65 0 0 1 355 430 A 105 105 0 0 1 355 325 A 170 170 0 0 1 525 325"
-        fill="none"
-        stroke="#2c3e50"
-        stroke-width="1.2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        :style="{ transform: `rotate(${props.rotation || 0}deg)` }"
-      />
-
-      <!-- Integration Symbol and Formula -->
-      <text
-        x="100"
-        y="200"
-        font-family="monospace"
-        font-size="24"
-        fill="#2c3e50"
+  <div class="pattern-wrapper" aria-hidden="true">
+    <div class="pattern-background">
+      <svg
+        width="100%"
+        height="100%"
+        viewBox="0 0 1000 800"
+        preserveAspectRatio="xMidYMid slice"
+        class="field-notes-svg"
       >
-        ∫
-      </text>
-      <text
-        x="120"
-        y="195"
-        font-family="monospace"
-        font-size="12"
-        fill="#2c3e50"
-      >
-        f(x) dx = F(b) - F(a)
-      </text>
+        <defs>
+          <pattern
+            id="subtleGrid"
+            width="40"
+            height="40"
+            patternUnits="userSpaceOnUse"
+          >
+            <path d="M 40 0 L 0 0 0 40" fill="none" class="grid-subtle" />
+          </pattern>
+        </defs>
 
-      <circle
-        cx="400"
-        cy="400"
-        r="200"
-        fill="none"
-        stroke="#2c3e50"
-        stroke-width="0.5"
-        stroke-dasharray="2,2"
-      />
+        <!-- Subtle Base Grid -->
+        <rect width="100%" height="100%" fill="url(#subtleGrid)" opacity="0.45" />
 
-      <!-- Technical notes -->
-      <text
-        x="600"
-        y="750"
-        font-family="monospace"
-        font-size="10"
-        fill="#5c6a7d"
-      >
-        ITERATION LIMIT: N -> ∞
-      </text>
-      <text
-        x="600"
-        y="770"
-        font-family="monospace"
-        font-size="10"
-        fill="#5c6a7d"
-      >
-        SCALE FACTOR: φ ≈ 1.618
-      </text>
-    </svg>
+        <!-- Flowing Topographic Elevation Contours -->
+        <g class="topo-lines">
+          <!-- Ridge 1 (Upper Flow) -->
+          <path d="M -50 80 Q 250 20, 520 120 T 1050 90" fill="none" class="contour-minor" />
+          <path d="M -50 120 Q 230 60, 500 160 T 1050 130" fill="none" class="contour-index" />
+          <path d="M -50 160 Q 210 100, 480 200 T 1050 170" fill="none" class="contour-minor" />
+          <path d="M -50 200 Q 190 140, 460 240 T 1050 210" fill="none" class="contour-minor" />
+
+          <!-- Ridge 2 (Center-Left Flow) -->
+          <path d="M -50 320 C 180 280, 360 420, 640 340 S 900 300, 1050 360" fill="none" class="contour-minor" />
+          <path d="M -50 370 C 170 330, 350 470, 630 390 S 890 350, 1050 410" fill="none" class="contour-index" />
+          <path d="M -50 420 C 160 380, 340 520, 620 440 S 880 400, 1050 460" fill="none" class="contour-minor" />
+          <path d="M -50 470 C 150 430, 330 570, 610 490 S 870 450, 1050 510" fill="none" class="contour-minor" />
+
+          <!-- Ridge 3 (Bottom Flow) -->
+          <path d="M -50 600 Q 320 680, 650 540 T 1050 640" fill="none" class="contour-index" />
+          <path d="M -50 650 Q 300 730, 630 590 T 1050 690" fill="none" class="contour-minor" />
+          <path d="M -50 700 Q 280 780, 610 640 T 1050 740" fill="none" class="contour-minor" />
+        </g>
+      </svg>
+    </div>
   </div>
 </template>
 
 <style scoped>
-.pattern-background {
+.pattern-wrapper {
   position: absolute;
   top: 0;
   left: 0;
@@ -148,11 +64,37 @@ const props = defineProps<{
   pointer-events: none;
 }
 
+.pattern-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
 .field-notes-svg {
   width: 100%;
   height: 100%;
 }
-.spiral-path {
-  transform-origin: 400px 400px;
+
+.grid-subtle {
+  stroke: var(--clr-border, #c0c0b2);
+  stroke-width: 0.45;
+  opacity: 0.28;
+}
+
+.contour-minor {
+  stroke: var(--clr-text-secondary, #5c6a7d);
+  stroke-width: 0.6;
+  opacity: 0.16;
+}
+
+.contour-index {
+  stroke: var(--clr-text-primary, #2c3e50);
+  stroke-width: 1.1;
+  stroke-dasharray: 10, 6;
+  opacity: 0.25;
 }
 </style>
