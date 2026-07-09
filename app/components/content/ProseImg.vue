@@ -52,7 +52,7 @@ onUnmounted(() => {
     <div class="plate-header">
       <div class="plate-badge">
         <span class="indicator-diamond">✦</span>
-        <span class="plate-title">SPECIMEN ARCHIVE // FIG.</span>
+        <span class="plate-title">IMAGE ARCHIVE // FIG.</span>
       </div>
       <button
         v-if="!hasError"
@@ -62,7 +62,7 @@ onUnmounted(() => {
         aria-label="Inspect high-resolution specimen image"
       >
         <span class="btn-icon">🔍</span>
-        <span class="btn-text">INSPECT PLATE</span>
+        <span class="btn-text">INSPECT</span>
       </button>
     </div>
 
@@ -106,7 +106,7 @@ onUnmounted(() => {
           <div class="lightbox-toolbar">
             <div class="toolbar-info">
               <span class="indicator-diamond">✦</span>
-              <span>FIELD SPECIMEN HIGH-RESOLUTION INSPECTION</span>
+              <span>FIELD IMAGE HIGH-RESOLUTION INSPECTION</span>
             </div>
             <button type="button" class="lightbox-close" @click="closeLightbox">
               [ ✕ CLOSE ]

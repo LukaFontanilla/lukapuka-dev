@@ -56,7 +56,7 @@ useSeoMeta({
             <div class="video-aspect-ratio">
               <iframe
                 :src="`https://www.youtube.com/embed/${data.youtubeId}?autoplay=0&rel=0&modestbranding=1`"
-                title="Acoustic Specimen Player"
+                title="Acoustic Player"
                 frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 referrerpolicy="strict-origin-when-cross-origin"
@@ -86,13 +86,13 @@ useSeoMeta({
       </div>
 
       <div class="card-footer">
-        <span>↳ FIELD OBSERVATION DECK</span>
-        <span>END OF SPECIMEN LOG</span>
+        <span>↳ Performance Notes</span>
+        <span>END OF SONIC LOG</span>
       </div>
     </div>
 
     <div v-else class="error-msg-card">
-      <span>[x] CRITICAL ERROR: AUDIO SPECIMEN LOG NOT FOUND</span>
+      <span>[x] CRITICAL ERROR: AUDIO LOG NOT FOUND</span>
       <NuxtLink to="/listenings" class="error-back"
         >Return to Station Tuner</NuxtLink
       >

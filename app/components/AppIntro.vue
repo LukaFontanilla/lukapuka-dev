@@ -197,7 +197,7 @@ onMounted(() => {
         <!-- Full Sidebar Content -->
         <template v-else>
             <div class="intro-card field-guide-cover">
-                <div class="eyebrow-text">VOL. 01 · EST. 2026</div>
+                <div class="eyebrow-text">VOL. 01 · EST. 2024</div>
                 <h1 @click="handleClick">lukapuka</h1>
                 <h2>Creative Developer & Visual Designer</h2>
                 <p>

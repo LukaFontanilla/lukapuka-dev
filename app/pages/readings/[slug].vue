@@ -81,7 +81,7 @@ useSeoMeta({
         <!-- RIGHT PANEL: NATURALIST'S READING LEDGER TEXT -->
         <main class="folio-ledger-panel">
           <div class="ledger-topbar">
-            <span class="ledger-label">NATURALIST'S FIELD CRITIQUE & NOTES</span>
+            <span class="ledger-label"></span>
             <NuxtLink to="/readings" class="back-link">◂ BACK TO READINGS LOG</NuxtLink>
           </div>
 
@@ -90,7 +90,7 @@ useSeoMeta({
           </div>
 
           <div class="ledger-footer">
-            <span>↳ SPECIMEN LEDGER ENTRY VERIFIED</span>
+            <span>↳ ENTRY VERIFIED</span>
             <span>[ ARCHIVE FILE END ]</span>
           </div>
         </main>

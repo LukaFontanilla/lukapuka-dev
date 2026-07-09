@@ -4,7 +4,7 @@ import { computed } from 'vue'
 const props = defineProps({
   youtubeId: { type: String, default: '' },
   src: { type: String, default: '' },
-  title: { type: String, default: 'Acoustic Specimen Player' },
+  title: { type: String, default: 'Acoustic Player' },
   channel: { type: String, default: '' }
 })
 
