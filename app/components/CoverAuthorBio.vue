@@ -47,13 +47,21 @@ const setSpecimen = (index: number) => {
   currentSpecimenIndex.value = index
 }
 
-const paragraphs = [
-  "<span class=\"archival-lead\">I started this site</span> as a way to document my explorations in <em class=\"ink-green\">design and development</em>. I've always been drawn to the intersection of art and programming, and I wanted to create a digital space that reflects that in an authentic way. To me that meant handwriting my own design system, CSS and JavaScript components with <span class=\"ink-rust\">no frameworks</span>, building a very clear and cohesive design system with a focus on a central theme (<em class=\"ink-rust\">National Park Field Guide</em>), having a mix of personal and work-related writing, and of course a sprinkle of random projects—other explorations, topology concepts, and music.",
-  "There's a lot of influence that I've taken from other developers as it relates to this site design whether it be their <a href=\"https://chsmc.org/\">site design</a>, <a href=\"https://www.joshwcomeau.com/animation/scroll-driven-animations/\">writings</a>, OR unique <a href=\"https://sxywu.github.io/\">SVG art</a>. I hope that my own attempt to make something <em class=\"ink-green\">authentic, different, but still relatable</em>, can be a good example for others to draw inspiration from.",
-  "My <a href=\"/writings\">writings</a> will mostly be about <span class=\"archival-caps rust\">technology</span>, <span class=\"archival-caps green\">development</span>, and <span class=\"archival-caps gold\">design</span>. Some taken directly from work engagements, others tied to personal interests and musings. Eventually my <em class=\"ink-rust\">abstract short stories</em> will land on that page too.",
+const bioLines = [
+  "<span class=\"archival-lead\">I started this site</span> as a way to document my explorations in <em class=\"ink-green\">design and development</em>.",
+  "I've always been drawn to the intersection of art and programming, and I wanted to create a digital space that reflects that in an authentic way.",
+  "To me that meant handwriting my own design system, CSS and JavaScript components with <span class=\"ink-rust\">no frameworks</span>,",
+  "building a very clear and cohesive design system with a focus on a central theme (<em class=\"ink-rust\">National Park Field Guide</em>),",
+  "having a mix of personal and work-related writing, and of course a sprinkle of random projects—other explorations, topology concepts, and music.",
+  "There's a lot of influence that I've taken from other developers as it relates to this site design whether it be their <a href=\"https://chsmc.org/\">site design</a>,",
+  "<a href=\"https://www.joshwcomeau.com/animation/scroll-driven-animations/\">writings</a>, OR unique <a href=\"https://sxywu.github.io/\">SVG art</a>.",
+  "I hope that my own attempt to make something <em class=\"ink-green\">authentic, different, but still relatable</em>, can be a good example for others to draw inspiration from.",
+  "My <a href=\"/writings\">writings</a> will mostly be about <span class=\"archival-caps rust\">technology</span>, <span class=\"archival-caps green\">development</span>, and <span class=\"archival-caps gold\">design</span>. Some taken directly from work engagements, others tied to personal interests and musings.",
+  "Eventually my <em class=\"ink-rust\">abstract short stories</em> will land on that page too.",
   "The <a href=\"/listenings\">listenings page</a> is my attempt to share <em class=\"ink-green\">sonic recordings and live performances</em> that have inspired me, captured my attention, that I have learned from, and want others to hear.",
   "You'll find that my <a href=\"/readings\">readings</a> are eclectic—a mix of <span class=\"archival-caps\">short stories</span>, <span class=\"archival-caps green\">fantasy & sci-fi novels</span>, <span class=\"archival-caps rust\">horror</span>, <em class=\"ink-gold\">journalist deep dives into underground societies</em>, and a bit of everything else in between.",
-  "This site is still very much a <em class=\"ink-rust\">work in progress</em>, but I plan to stay active in its evolution. A few things to note: the site will match your <span class=\"archival-caps\">system theme preference</span> so give it a change in your settings to see a different side of it. It's written in <a href=\"https://nuxt.com/\">NuxtJS/TypeScript</a> and hosted on my personal domain. <em class=\"ink-green\">Thanks for visiting.</em>"
+  "This site is still very much a <em class=\"ink-rust\">work in progress</em>, but I plan to stay active in its evolution. A few things to note: the site will match your <span class=\"archival-caps\">system theme preference</span> so give it a change in your settings to see a different side of it.",
+  "It's written in <a href=\"https://nuxt.com/\">NuxtJS/TypeScript</a> and hosted on my personal domain. <em class=\"ink-green\">Thanks for visiting.</em>"
 ]
 
 const handleScroll = () => {
@@ -223,7 +231,7 @@ onUnmounted(() => {
         </div>
       </div>
       
-      <p v-for="(para, idx) in paragraphs" :key="idx" v-html="para"></p>
+      <p v-for="(line, idx) in bioLines" :key="idx" class="bio-line" v-html="line"></p>
     </div>
   </div>
 </template>
@@ -233,8 +241,11 @@ onUnmounted(() => {
 .scrollable-text-container {
   position: relative;
   width: 100%;
-  height: 24rem; /* Compact scroll height inside the unified card */
+  flex: 1;
+  min-height: 0;
   overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
   padding: var(--spacing-xs) var(--spacing-lg) var(--spacing-md) var(--spacing-lg);
   z-index: 1;
 }
@@ -266,95 +277,102 @@ onUnmounted(() => {
   text-align: left;
 }
 
-@keyframes round-circle {
+@keyframes orbit-line {
   0% {
-    transform: translateX(0);
-    opacity: 0.8;
-    filter: blur(0.2px);
-  }
-  12% {
-    transform: translateX(0);
-    opacity: 0.8;
-    filter: blur(0.5px);
+    padding-left: 0px;
+    transform: rotate(0deg);
+    opacity: 0.7;
   }
   50% {
-    transform: translateX(2rem); /* Generous shift to clear the lens without causing layout shifts */
-    opacity: 1;
-    filter: blur(0);
+    padding-left: 0px;
+    transform: rotate(0deg);
+    opacity: 0.85;
   }
-  88% {
-    transform: translateX(0);
-    opacity: 0.8;
-    filter: blur(0.5px);
+  64% {
+    padding-left: 70px;
+    transform: rotate(-0.4deg);
+    opacity: 0.95;
+  }
+  78% {
+    padding-left: 144px;
+    transform: rotate(0deg);
+    opacity: 1;
+  }
+  92% {
+    padding-left: 110px;
+    transform: rotate(0.3deg);
+    opacity: 0.95;
   }
   100% {
-    transform: translateX(0);
-    opacity: 0.8;
-    filter: blur(0.2px);
+    padding-left: 75px;
+    transform: rotate(0deg);
+    opacity: 0.9;
   }
 }
 
-.about-me-section p {
+.about-me-section .bio-line {
   font-family: 'Merriweather', serif;
   line-height: 30px; /* Aligned to ruled lines */
-  margin-bottom: 30px; /* Aligned to ruled lines */
+  margin-bottom: 15px; /* Half-line rhythm keeping 30px grid alignment */
   font-size: 0.92rem;
   color: var(--clr-text-primary);
-  animation: round-circle 1s both;
-  animation-timeline: view(block -40px calc(100% - 160px));
+  box-sizing: border-box;
+  transform-origin: left center;
+  animation: orbit-line 1s linear both;
+  animation-timeline: view(block);
 }
 
-.about-me-section p :deep(a) {
+.about-me-section .bio-line :deep(a) {
   color: var(--clr-accent-primary);
   text-decoration: none;
   border-bottom: 1px dashed var(--clr-accent-primary);
   transition: color var(--transition-duration) var(--transition-timing), border-bottom-color var(--transition-duration) var(--transition-timing);
 }
 
-.about-me-section p :deep(a):hover {
+.about-me-section .bio-line :deep(a):hover {
   color: var(--clr-accent-secondary);
   border-bottom-style: solid;
   border-bottom-color: var(--clr-accent-secondary);
 }
 
 /* ARCHIVAL MONOGRAPH PRESET STYLES */
-.about-me-section p :deep(.archival-lead) {
+.about-me-section .bio-line :deep(.archival-lead) {
   font-variant: small-caps;
   letter-spacing: 0.08em;
   font-weight: 700;
   color: var(--clr-text-primary);
 }
 
-.about-me-section p :deep(.archival-caps) {
+.about-me-section .bio-line :deep(.archival-caps) {
   font-variant: small-caps;
   letter-spacing: 0.08em;
   font-weight: 700;
   color: var(--clr-text-primary);
 }
 
-.about-me-section p :deep(.archival-caps.rust) {
+.about-me-section .bio-line :deep(.archival-caps.rust) {
   color: var(--clr-accent-primary);
 }
 
-.about-me-section p :deep(.archival-caps.green) {
+.about-me-section .bio-line :deep(.archival-caps.green) {
   color: var(--clr-accent-secondary);
 }
 
-.about-me-section p :deep(.archival-caps.gold) {
+.about-me-section .bio-line :deep(.archival-caps.gold) {
   color: var(--clr-accent-warning);
 }
 
-.about-me-section p :deep(.ink-rust) {
+.about-me-section .bio-line :deep(.ink-rust) {
   color: var(--clr-accent-primary);
   font-weight: 600;
 }
 
-.about-me-section p :deep(.ink-green) {
+.about-me-section .bio-line :deep(.ink-green) {
   color: var(--clr-accent-secondary);
   font-weight: 600;
 }
 
-.about-me-section p :deep(.ink-gold) {
+.about-me-section .bio-line :deep(.ink-gold) {
   color: var(--clr-accent-warning);
   font-weight: 600;
 }
@@ -364,9 +382,12 @@ onUnmounted(() => {
   float: left;
   position: sticky;
   top: var(--spacing-xs);
-  width: 124px;
-  margin-right: var(--spacing-md);
+  width: 128px;
+  height: 128px;
+  margin-right: 1.5rem;
   margin-bottom: var(--spacing-sm);
+  shape-outside: circle(64px at 50% 50%);
+  shape-margin: 18px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -458,21 +479,21 @@ onUnmounted(() => {
 
 @media (max-width: 768px) {
   .scrollable-text-container {
-    height: auto !important;
-    max-height: none !important;
-    overflow: visible !important;
     padding: var(--spacing-xs) var(--spacing-md) var(--spacing-md) var(--spacing-md);
   }
 
   .specimen-interactive-group {
-    width: 96px;
+    width: 104px;
+    height: 104px;
+    shape-outside: circle(52px at 50% 50%);
+    shape-margin: 14px;
     margin-right: var(--spacing-sm);
     margin-bottom: var(--spacing-sm);
   }
 
   .specimen-lens {
-    width: 90px;
-    height: 90px;
+    width: 100px;
+    height: 100px;
   }
 }
 </style>
