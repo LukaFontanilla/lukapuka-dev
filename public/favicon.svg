@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+  <style>
+    :root {
+      --clr-border: #c0c0b2;
+      --clr-accent-primary: #b8541a;
+      --clr-text-primary: #2c3e50;
+      --clr-text-muted: #8d9ba9;
+      --font-mono: 'Fira Code', 'Courier New', monospace;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --clr-border: #4d6e8c;
+        --clr-accent-primary: #eb8c50;
+        --clr-text-primary: #f4ede0;
+        --clr-text-muted: #9baec1;
+      }
+    }
+    .border-ring { stroke: var(--clr-border); }
+    .accent { stroke: var(--clr-accent-primary); }
+    .accent-fill { fill: var(--clr-accent-primary); }
+    .text-primary { fill: var(--clr-text-primary); }
+    .stroke-primary { stroke: var(--clr-text-primary); }
+    .text-muted { fill: var(--clr-text-muted); }
+    text {
+      font-family: var(--font-mono);
+      font-weight: 700;
+    }
+  </style>
+
+  <!-- Specimen frame circles -->
+  <circle class="border-ring" cx="60" cy="60" r="56" fill="none" stroke-width="2" opacity="0.85" />
+  <circle class="border-ring" cx="60" cy="60" r="49" fill="none" stroke-width="1" stroke-dasharray="2,4" opacity="0.6" />
+
+  <!-- Topological Puncture -->
+  <circle class="accent" cx="52" cy="58" r="9" fill="none" stroke-width="2" stroke-dasharray="3,3" />
+  <circle class="accent-fill" cx="52" cy="58" r="2.2" opacity="0.85" />
+
+  <!-- Basepoint x0 -->
+  <circle class="text-primary" cx="85" cy="58" r="3.5" />
+  <text class="text-primary" x="93" y="62" font-size="9">x₀</text>
+
+  <!-- Homotopy Loop gamma_0 (Solid) -->
+  <path class="accent" d="M 85 58 C 85 22, 25 22, 25 58 C 25 94, 85 94, 85 58" fill="none" stroke-width="2.6" />
+  <text class="accent-fill" x="30" y="33" font-size="8.5">γ₀</text>
+
+  <!-- Homotopy Loop gamma_1 (Dashed Deformation) -->
+  <path class="stroke-primary" d="M 85 58 C 80 32, 36 32, 36 58 C 36 84, 80 84, 85 58" fill="none" stroke-width="2" stroke-dasharray="4,4" opacity="0.9" />
+  <text class="text-muted" x="65" y="44" font-size="7.5">γ₁</text>
+
+  <!-- Technical Annotations -->
+  <text class="text-primary" x="60" y="20" text-anchor="middle" font-size="8.5">π₁(X, x₀) ≅ ℤ</text>
+  <text class="text-muted" x="60" y="105" text-anchor="middle" font-size="7">γ₀ ≃ γ₁</text>
+</svg>

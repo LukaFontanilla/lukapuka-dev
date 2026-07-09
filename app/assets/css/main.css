@@ -77,6 +77,29 @@
   --shadow-color: var(--clr-text-muted);
 }
 
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --clr-bg-primary: #1a2e44;
+    --clr-bg-secondary: #2c435a;
+    --clr-bg-tertiary: #415a75;
+    --clr-text-primary: #f4ede0;
+    --clr-text-secondary: #CCCCCC;
+    --clr-text-muted: #9baec1;
+    --clr-border: #4d6e8c;
+    --shadow-color-rgb: 0, 0, 0;
+    --clr-accent-primary: #eb8c50;
+    --clr-accent-secondary: #74a87c;
+    --clr-accent-success: #74a87c;
+    --clr-accent-danger: #c75454;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.25), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.25), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+    --branch-color: var(--clr-text-secondary);
+    --shadow-color: var(--clr-text-muted);
+  }
+}
+
 [data-theme="dark"] {
   color-scheme: dark;
   /* Backgrounds -- Inspired by the 'Field Guide' cover */

@@ -214,11 +214,12 @@ onUnmounted(() => {
   align-items: center;
   justify-content: space-between;
   gap: 3rem;
-  padding: 0.5rem 1.25rem;
+  padding: 0.55rem 1.8rem;
   background-color: var(--clr-bg-primary);
   border: 1px solid var(--clr-border);
   border-radius: var(--border-radius-md);
   width: fit-content;
+  min-width: 680px;
   margin: 0 auto;
   box-shadow: var(--shadow-md);
 }
@@ -251,6 +252,7 @@ onUnmounted(() => {
     padding: 0.35rem 0.55rem;
     width: 96%;
     max-width: 600px;
+    min-width: 0;
     justify-content: space-between;
   }
   
@@ -285,9 +287,15 @@ onUnmounted(() => {
 
 @media (min-width: 1101px) {
   .content-wrapper {
-    width: 1200px !important;
-    max-width: 90vw;
+    width: 1440px !important;
+    max-width: 94vw;
     margin-right: 0 !important; /* Remove margin that shifts it */
+  }
+
+  .top-nav {
+    width: 960px;
+    max-width: 90vw;
+    padding: 0.65rem 2.5rem;
   }
 }
 

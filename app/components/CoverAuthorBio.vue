@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { useRouter } from 'vue-router'
 import { useSpiralState } from '~/composables/useSpiralState'
 
+const router = useRouter()
 const scrollContainer = ref<HTMLElement | null>(null)
 const { spiralRotation } = useSpiralState()
 
@@ -73,6 +75,18 @@ const handleScroll = () => {
   }
 }
 
+const handleBioClick = (e: MouseEvent) => {
+  const target = e.target as HTMLElement
+  const link = target.closest('a')
+  if (link) {
+    const href = link.getAttribute('href')
+    if (href && href.startsWith('/') && !href.startsWith('//')) {
+      e.preventDefault()
+      router.push(href)
+    }
+  }
+}
+
 onMounted(() => {
   if (scrollContainer.value) {
     scrollContainer.value.addEventListener('scroll', handleScroll)
@@ -88,7 +102,7 @@ onUnmounted(() => {
 
 <template>
   <div class="scrollable-text-container notepaper" ref="scrollContainer">
-    <div class="about-me-section">
+    <div class="about-me-section" @click="handleBioClick">
       <!-- Interactive Topological Specimen Container (Floats left, cycles on click) -->
       <div class="specimen-interactive-group">
         <div 
