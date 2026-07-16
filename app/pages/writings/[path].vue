@@ -2,6 +2,9 @@
 const slug = useRoute().path
 const { data } = await useAsyncData(() => queryCollection('content').path(slug).first())
 
+const activePath = useState<string | null>("active-transition-path", () => null);
+activePath.value = slug;
+
 useSeoMeta({
   title: () => data.value?.title || 'Writing Entry',
   ogTitle: () => data.value?.title ? `${data.value.title} - Writings` : 'Writings',
@@ -20,7 +23,15 @@ useSeoMeta({
     <div v-if="data" class="article-card">
       <header class="article-header">
         <div class="eyebrow">{{ data.date }}</div>
-        <h1 class="article-title">{{ data.title }}</h1>
+        <h1
+          class="article-title"
+          :style="{
+            viewTransitionName: 'title-transition',
+            viewTransitionClass: 'title-transition',
+          }"
+        >
+          {{ data.title }}
+        </h1>
         <div class="tags">
           <span v-for="tag in data.tags" :key="tag" class="tag">{{ tag }}</span>
         </div>

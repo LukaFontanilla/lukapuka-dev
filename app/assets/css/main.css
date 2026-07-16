@@ -521,28 +521,12 @@ p {
   opacity: 1;
   color: var(--clr-accent-primary);
   transform: translateX(1px);
-  /* Gentle nudge to the right */
 }
 
-/* --- Recommended Active State --- */
 .nav-link--active {
   opacity: 1;
   font-weight: bold;
 }
-
-/* The decorative line for the active link
-        .nav-link--active::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 3px;
-            height: 70%;
-            background-color: var(--clr-bg-primary);
-            border-radius: 3px;
-            transition: all 0.3s ease-in-out;
-        } */
 
 @keyframes scale {
   to {
@@ -551,22 +535,16 @@ p {
   }
 }
 
-@supports (animation-timeline: view()) {
+/* @supports (animation-timeline: view()) {
   #cards {
     --numcards: 4;
     view-timeline-name: --cards-element-scrolls-in-body;
-  }
-
-  /* .scrollable-cards_item_content {
-        --start-range: calc(var(--index0) / var(--numcards) * 100%);
-        --end-range: calc((var(--index)) / var(--numcards) * 100%);
-        animation: linear scale forwards;
-        animation-timeline: --cards-element-scrolls-in-body;
-        animation-range: exit-crossing var(--start-range) exit-crossing var(--end-range);
-    } */
+  
 }
 
-/* --- Cover Page Themes (Task 2) --- */
+*/
+
+/* --- Cover Page Themes --- */
 .cover-page {
   position: relative;
   height: 100%;
@@ -752,6 +730,107 @@ p {
   navigation: auto;
 }
 
+/* ==========================================================================
+   FIELD GUIDE TITLE VIEW TRANSITION: OPTICAL FOCUS (Option 3)
+   Optical lens focus with Z-axis depth micro-blur
+   Targeted via Level 1 name (title-transition) & Level 2 class (.title-transition)
+   ========================================================================== */
+
+/* Prevent <h1> block elements from spanning 100% of container width so their 
+   bounding box exactly matches the words (just like <span> items). 
+   This prevents horizontal stretching, overflow distortion, and flashing at the end of the transition! */
+.specimen-title,
+.item-title,
+.article-title,
+.book-title {
+  width: fit-content;
+  max-width: 100%;
+}
+
+::view-transition-group(title-transition),
+::view-transition-group(.title-transition) {
+  animation-duration: 380ms;
+  animation-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+
+::view-transition-old(title-transition),
+::view-transition-old(.title-transition) {
+  animation: 160ms ease-out both blurOut;
+  mix-blend-mode: plus-lighter;
+}
+
+::view-transition-new(title-transition),
+::view-transition-new(.title-transition) {
+  animation: 380ms cubic-bezier(0.2, 0, 0, 1) both blurIn;
+  mix-blend-mode: plus-lighter;
+}
+
+@keyframes blurOut {
+  from {
+    opacity: 1;
+    filter: blur(0px);
+  }
+
+  to {
+    opacity: 0;
+    filter: blur(3px);
+  }
+}
+
+@keyframes blurIn {
+  from {
+    opacity: 0;
+    filter: blur(4px);
+  }
+
+  to {
+    opacity: 1;
+    filter: blur(0px);
+  }
+}
+
+/* --- Accessibility: Reduced Motion --- */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(title-transition),
+  ::view-transition-group(.title-transition) {
+    animation-duration: 150ms;
+    animation-timing-function: ease;
+  }
+
+  ::view-transition-old(title-transition),
+  ::view-transition-old(.title-transition) {
+    animation: 150ms ease-out both simpleFadeOut;
+  }
+
+  ::view-transition-new(title-transition),
+  ::view-transition-new(.title-transition) {
+    animation: 150ms ease-in both simpleFadeIn;
+  }
+
+  @keyframes simpleFadeOut {
+    from {
+      opacity: 1;
+      transform: none;
+    }
+
+    to {
+      opacity: 0;
+      transform: none;
+    }
+  }
+
+  @keyframes simpleFadeIn {
+    from {
+      opacity: 0;
+      transform: none;
+    }
+
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
 /* ==========================================================================
    FIELD GUIDE SCROLLBAR SYSTEM (DRAFTING RULER)
    ========================================================================== */

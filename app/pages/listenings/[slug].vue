@@ -2,6 +2,9 @@
 const route = useRoute();
 const slug = route.params.slug as string;
 
+const activePath = useState<string | null>("active-transition-path", () => null);
+activePath.value = `/listenings/${slug}`;
+
 // Fetch the content entry by path from unified 'content' collection
 const { data } = await useAsyncData(`listenings-${slug}`, () =>
   queryCollection("content").path(`/listenings/${slug}`).first(),
@@ -36,7 +39,15 @@ useSeoMeta({
             >RECORDING TYPE: {{ data.type || "observation" }}</span
           >
         </div>
-        <h1 class="article-title">{{ data.title }}</h1>
+        <h1
+          class="article-title"
+          :style="{
+            viewTransitionName: 'title-transition',
+            viewTransitionClass: 'title-transition',
+          }"
+        >
+          {{ data.title }}
+        </h1>
         <h2 v-if="data.subtitle" class="article-subtitle">
           Recorded Artist: {{ data.subtitle }}
         </h2>

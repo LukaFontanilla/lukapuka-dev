@@ -12,22 +12,22 @@ const searchQuery = ref<string>("");
 
 const typesList = ["All", "song", "interview", "live performance"];
 
-const filteredItems = computed(() => {
-  let list = listenings.value || [];
-  if (selectedType.value !== "All") {
-    list = list.filter((item) => item.type === selectedType.value);
-  }
-  if (searchQuery.value.trim()) {
-    const q = searchQuery.value.toLowerCase().trim();
-    list = list.filter(
-      (item) =>
-        item.title.toLowerCase().includes(q) ||
-        (item.description && item.description.toLowerCase().includes(q)) ||
-        (item.subtitle && item.subtitle.toLowerCase().includes(q)),
-    );
-  }
-  return list;
-});
+// Only the active/clicked row receives the view transition so other rows don't lift and overflow
+const activePath = useState<string | null>("active-transition-path", () => null);
+
+function isItemVisible(item: any): boolean {
+  const typeMatches = selectedType.value === "All" || item.type === selectedType.value;
+  if (!typeMatches) return false;
+  if (!searchQuery.value.trim()) return true;
+  const q = searchQuery.value.toLowerCase().trim();
+  return (
+    item.title.toLowerCase().includes(q) ||
+    (item.description && item.description.toLowerCase().includes(q)) ||
+    (item.subtitle && item.subtitle.toLowerCase().includes(q))
+  );
+}
+
+const visibleCount = computed(() => (listenings.value || []).filter(isItemVisible).length);
 
 const getBadgeColor = (type: string) => {
   switch (type) {
@@ -115,34 +115,56 @@ useSeoMeta({
           </thead>
           <tbody>
             <tr
-              v-for="item in filteredItems"
+              v-for="item in listenings || []"
               :key="item.title"
-              class="ledger-row"
+              class="ledger-row specimen-row"
+              :class="{ 'is-visible': isItemVisible(item), 'is-hidden': !isItemVisible(item) }"
             >
               <td>
-                <NuxtLink :to="item.path" class="ledger-link">
-                  <span class="specimen-title">{{ item.title }}</span>
-                </NuxtLink>
-                <span class="specimen-sub"
-                  >by {{ item.subtitle || "Unknown Artist" }}</span
-                >
-                <p class="specimen-desc">{{ item.description }}</p>
-                <div class="specimen-tags">
-                  <span v-for="tag in item.tags" :key="tag" class="mini-tag"
-                    >#{{ tag }}</span
-                  >
+                <div class="cell-collapse-wrapper">
+                  <div class="cell-content">
+                    <NuxtLink
+                      :to="item.path"
+                      class="ledger-link"
+                      @mousedown="activePath = item.path"
+                      @click="activePath = item.path"
+                    >
+                      <span
+                        class="specimen-title"
+                        :style="{
+                          viewTransitionName:
+                            activePath === item.path ? 'title-transition' : 'none',
+                          viewTransitionClass: 'title-transition',
+                        }"
+                        >{{ item.title }}</span
+                      >
+                    </NuxtLink>
+                    <span class="specimen-sub"
+                      >by {{ item.subtitle || "Unknown Artist" }}</span
+                    >
+                    <p class="specimen-desc">{{ item.description }}</p>
+                    <div class="specimen-tags">
+                      <span v-for="tag in item.tags" :key="tag" class="mini-tag"
+                        >#{{ tag }}</span
+                      >
+                    </div>
+                  </div>
                 </div>
               </td>
               <td>
-                <span class="stamp-badge" :class="getBadgeColor(item.type || '')">
-                  {{ item.type || "Specimen" }}
-                </span>
+                <div class="cell-collapse-wrapper">
+                  <div class="cell-content">
+                    <span class="stamp-badge" :class="getBadgeColor(item.type || '')">
+                      {{ item.type || "Specimen" }}
+                    </span>
+                  </div>
+                </div>
               </td>
             </tr>
           </tbody>
         </table>
 
-        <div v-if="filteredItems.length === 0" class="no-signals">
+        <div v-if="visibleCount === 0" class="no-signals">
           <span>[!] NO OBSERVATION SIGNALS DETECTED IN THIS BANDWIDTH</span>
         </div>
       </div>
@@ -340,14 +362,10 @@ useSeoMeta({
   border-collapse: collapse;
 }
 
-.ledger-table th,
-.ledger-table td {
+.ledger-table th {
   padding: var(--spacing-md);
   text-align: left;
   border-bottom: 1px solid var(--clr-border);
-}
-
-.ledger-table th {
   font-family: var(--font-family-mono);
   font-size: var(--font-size-sm);
   color: var(--clr-text-secondary);
@@ -360,6 +378,50 @@ useSeoMeta({
 
 .ledger-row {
   transition: background-color 0.2s ease;
+}
+
+.ledger-row td {
+  padding: 0;
+  text-align: left;
+  border-bottom: 1px solid var(--clr-border);
+  transition: border-bottom-color 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.specimen-row.is-hidden td {
+  border-bottom-color: transparent;
+}
+
+.cell-collapse-wrapper {
+  display: grid;
+  grid-template-rows: 1fr;
+  transition:
+    grid-template-rows 0.38s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+    filter 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 1;
+  filter: blur(0px);
+  transform: translateY(0);
+}
+
+.specimen-row.is-hidden .cell-collapse-wrapper {
+  grid-template-rows: 0fr;
+  opacity: 0;
+  filter: blur(4px);
+  transform: translateY(-6px);
+  pointer-events: none;
+}
+
+.cell-content {
+  min-height: 0;
+  overflow: hidden;
+  padding: var(--spacing-md);
+  transition: padding 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.specimen-row.is-hidden .cell-content {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
 }
 
 .ledger-row:hover {
@@ -500,7 +562,7 @@ useSeoMeta({
   }
 
   .ledger-table th,
-  .ledger-table td {
+  .cell-content {
     padding: var(--spacing-sm);
   }
 

@@ -39,7 +39,7 @@ export default defineNuxtConfig({
       ],
       link: [
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
-        { rel: 'alternate icon', type: 'image/x-icon', href: '/favicon.ico' },
+        // { rel: 'alternate icon', type: 'image/x-icon', href: '/favicon.ico' },
         // { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         // { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
         // { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@400;600;700&family=Merriweather:ital,wght@0,400;0,700;1,400&family=Fira+Code:wght@400;500&display=swap' }

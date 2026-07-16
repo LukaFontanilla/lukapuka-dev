@@ -4,9 +4,9 @@ import CoverAuthorBio from '~/components/CoverAuthorBio.vue'
 useSeoMeta({
   title: 'Home',
   ogTitle: "Luka's Field Guide - Design & Development Portfolio",
-  description: 'A collection of writings, data, and interactive design explorations by Luka Fontanilla. Documenting journeys in design, development, and ecology.',
-  ogDescription: 'A collection of writings, data, and interactive design explorations by Luka Fontanilla. Documenting journeys in design, development, and ecology.',
-  ogImage: '/field_guide_stag.png',
+  description: 'A collection of writings, data, and interactive design explorations by Luka Fontanilla. Documenting journeys in design, development, and randomness.',
+  ogDescription: 'A collection of writings, data, and interactive design explorations by Luka Fontanilla. Documenting journeys in design, development, and randomness.',
+  ogImage: '/favicon.svg',
   twitterCard: 'summary_large_image',
   ogType: 'website'
 })

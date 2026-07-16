@@ -5,6 +5,9 @@ const route = useRoute()
 const slug = route.params.slug as string
 const { data } = await useAsyncData(route.path, () => queryCollection('content').path(route.path).first())
 
+const activePath = useState<string | null>("active-transition-path", () => null);
+activePath.value = route.path;
+
 const isCoverOpen = ref(false)
 
 const openCoverLightbox = () => {
@@ -69,7 +72,15 @@ useSeoMeta({
 
 
           <div class="book-metadata">
-            <h1 class="book-title">{{ data.title }}</h1>
+            <h1
+              class="book-title"
+              :style="{
+                viewTransitionName: 'title-transition',
+                viewTransitionClass: 'title-transition',
+              }"
+            >
+              {{ data.title }}
+            </h1>
             <h2 class="book-author">by {{ data.subtitle }}</h2>
             <div class="book-log-date">CATALOGUED: {{ data.date }}</div>
             <div class="book-tags">

@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="340 185 360 360" width="100%" height="100%">
+  <defs>
+    <style>
+      .topo-caption { font-family: 'Fira Code', 'Courier New', monospace; font-size: 9.5px; fill: #5c6a7d; letter-spacing: 0.05em; }
+      .topo-text-code { font-family: 'Fira Code', 'Courier New', monospace; font-size: 11px; fill: #5c6a7d; letter-spacing: 0.02em; }
+      .topo-bold { font-weight: 700; }
+      .topo-accent-text { fill: #b8541a; }
+      .topo-dot-accent { fill: #b8541a; }
+      .topo-compass-ring { stroke: #c0c0b2; stroke-width: 0.9; opacity: 0.45; }
+      .topo-axis { stroke: #c0c0b2; stroke-width: 0.6; stroke-dasharray: 4, 6; opacity: 0.35; }
+      .topo-polygon-rect { stroke: #2c3e50; stroke-width: 1.5; }
+      .topo-arrow { stroke: #2c3e50; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+    </style>
+  </defs>
+  <!-- Outer Compass / Topological Framing Ring -->
+  <circle cx="520" cy="360" r="165" fill="none" class="topo-compass-ring" stroke-dasharray="3,3" />
+  <circle cx="520" cy="360" r="125" fill="none" class="topo-compass-ring" stroke-dasharray="1,5" />
+  
+  <!-- Crosshair Axes -->
+  <line x1="335" y1="360" x2="705" y2="360" class="topo-axis" />
+  <line x1="520" y1="175" x2="520" y2="545" class="topo-axis" />
+
+  <!-- Framing / Quotient Reference Squares -->
+  <rect x="445" y="285" width="150" height="150" fill="none" class="topo-polygon-rect" />
+  
+  <!-- Gluing Orientation Arrows on Polygon Edges -->
+  <!-- Top Edge (a -> right) -->
+  <path d="M 512 285 L 525 285 M 520 281 L 525 285 L 520 289" fill="none" class="topo-arrow" />
+  <text x="515" y="275" class="topo-caption topo-bold">a</text>
+  <!-- Bottom Edge (a -> right) -->
+  <path d="M 512 435 L 525 435 M 520 431 L 525 435 L 520 439" fill="none" class="topo-arrow" />
+  <text x="515" y="452" class="topo-caption topo-bold">a</text>
+  <!-- Left Edge (b -> up) -->
+  <path d="M 445 368 L 445 352 M 441 358 L 445 352 L 449 358 M 441 364 L 445 358 L 449 364" fill="none" class="topo-arrow" />
+  <text x="428" y="363" class="topo-caption topo-bold">b</text>
+  <!-- Right Edge (b -> up) -->
+  <path d="M 595 368 L 595 352 M 591 358 L 595 352 L 599 358 M 591 364 L 595 358 L 599 364" fill="none" class="topo-arrow" />
+  <text x="606" y="363" class="topo-caption topo-bold">b</text>
+
+  <!-- Quotient Identification Vertices (all 4 identify to single vertex v_0) -->
+  <circle cx="445" cy="285" r="3.5" class="topo-dot-accent" />
+  <circle cx="595" cy="285" r="3.5" class="topo-dot-accent" />
+  <circle cx="595" cy="435" r="3.5" class="topo-dot-accent" />
+  <circle cx="445" cy="435" r="3.5" class="topo-dot-accent" />
+
+  <!-- Center Quotient Map Label -->
+  <text x="520" y="355" text-anchor="middle" class="topo-caption topo-accent-text">
+    QUOTIENT MAP
+  </text>
+  <text x="520" y="372" text-anchor="middle" class="topo-text-code topo-bold">
+    I² / ∼  ──►  T²
+  </text>
+  <text x="520" y="388" text-anchor="middle" class="topo-caption">
+    word: a b a⁻¹ b⁻¹
+  </text>
+</svg>

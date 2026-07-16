@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-115 -85 240 310" width="100%" height="100%">
+  <defs>
+    <style>
+      .topo-text-main { font-family: 'Fira Code', 'Courier New', monospace; font-size: 11.5px; fill: #2c3e50; letter-spacing: 0.04em; }
+      .topo-text-code { font-family: 'Fira Code', 'Courier New', monospace; font-size: 11px; fill: #5c6a7d; letter-spacing: 0.02em; }
+      .topo-caption { font-family: 'Fira Code', 'Courier New', monospace; font-size: 9.5px; fill: #5c6a7d; letter-spacing: 0.05em; }
+      .topo-bold { font-weight: 700; }
+      .topo-dot { fill: #2c3e50; }
+      .topo-diagram-set { stroke: #5c6a7d; stroke-width: 1; opacity: 0.6; }
+      .topo-diagram-path { stroke: #2c3e50; stroke-width: 1.4; opacity: 0.85; }
+    </style>
+  </defs>
+  <!-- Open Neighborhood Cover & Homotopy Loops Diagram -->
+  <ellipse cx="-40" cy="0" rx="65" ry="45" fill="none" class="topo-diagram-set" stroke-dasharray="3,3" />
+  <text x="-95" y="-30" class="topo-caption">U_α</text>
+  <!-- Open neighborhood U_beta -->
+  <ellipse cx="40" cy="0" rx="65" ry="45" fill="none" class="topo-diagram-set" stroke-dasharray="3,3" />
+  <text x="75" y="-30" class="topo-caption">U_β</text>
+  <!-- Basepoint x0 -->
+  <circle cx="0" cy="22" r="3" class="topo-dot" />
+  <text x="-8" y="36" class="topo-caption">x₀</text>
+  <!-- Homotopy loop gamma_0 -->
+  <path d="M 0 22 C -60 -40, -10 -55, 0 -25 C 10 -55, 60 -40, 0 22" fill="none" class="topo-diagram-path" />
+  <text x="-35" y="-18" class="topo-caption">γ₀</text>
+  <!-- Homotopy loop gamma_1 -->
+  <path d="M 0 22 C -35 -15, -5 -25, 0 -8 C 5 -25, 35 -15, 0 22" fill="none" class="topo-diagram-path" stroke-dasharray="2,2" />
+  <text x="18" y="-5" class="topo-caption">γ₁</text>
+
+  <!-- Homotopy Formulas -->
+  <text x="-115" y="80" class="topo-text-main topo-bold">
+    FUNDAMENTAL GROUP: π₁(X, x₀)
+  </text>
+  <text x="-115" y="100" class="topo-text-code">
+    π₁(X, x₀) = { [γ] : γ(0) = γ(1) = x₀ } / ≃
+  </text>
+  <text x="-115" y="120" class="topo-text-code">
+    • π₁(S¹) ≅ ℤ       • π₁(T²) ≅ ℤ × ℤ
+  </text>
+  <text x="-115" y="140" class="topo-text-code">
+    • π₁(Sⁿ) ≅ 0  (n ≥ 2, simply connected)
+  </text>
+</svg>
