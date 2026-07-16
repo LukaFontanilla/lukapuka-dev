@@ -7,7 +7,6 @@ useSeoMeta({
   description: 'A collection of writings, data, and interactive design explorations by Luka Fontanilla. Documenting journeys in design, development, and randomness.',
   ogDescription: 'A collection of writings, data, and interactive design explorations by Luka Fontanilla. Documenting journeys in design, development, and randomness.',
   ogImage: '/favicon.svg',
-  twitterCard: 'summary_large_image',
   ogType: 'website'
 })
 </script>
