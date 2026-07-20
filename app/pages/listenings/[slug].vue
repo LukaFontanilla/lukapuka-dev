@@ -92,7 +92,7 @@ useSeoMeta({
 
       <!-- Specimen Notes / Snippet -->
       <div class="article-content">
-        <h3 class="notes-header">Naturalist's Logbook Notes</h3>
+        <h3 class="notes-header">Field Notes</h3>
         <ContentRenderer :value="data" />
       </div>
 

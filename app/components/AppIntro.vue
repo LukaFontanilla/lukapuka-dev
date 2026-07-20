@@ -30,8 +30,8 @@ const handleClick = () => {
 const projects = ref([
     { name: 'MCP Toolbox for Databases', category: 'mcp', link: 'https://github.com/googleapis/mcp-toolbox' },
     { name: 'Looker Agents in Gemini Enterprise', category: 'agents', link: 'https://github.com/lkrdev/looker-oauth-gemini-enterprise' },
-    { name: 'Chrome Tab Auto-Classifier', category: 'javascript', link: 'https://github.com/LukaFontanilla/tab-classifier-chrome-extension' },
-    { name: 'Project Delta', category: 'experiments', link: '#' }
+    { name: 'Embedded Analytics Fullstack', category: 'web app', link: 'https://embed.lkr.dev' },
+    { name: 'RTR Gaming Analytics App', category: 'web app', link: 'https://youtu.be/bvcpYymQ5iI?t=270' }
 ])
 
 
@@ -256,7 +256,13 @@ onMounted(() => {
                     </details>
                 </div>
                 
-                <hr class="style-other" />
+                <div class="hr-title-container">
+                    <hr class="style-infographics">
+                    <div class="title-wrapper">
+                        <span class="title-lang lang-jp">拾遺</span>
+                        <span class="title-lang lang-en">ADDENDA</span>
+                    </div>
+                </div>
                 <div class="organic-list">
                     <details class="list-section" :open="activeSection === 'index'">
                         <summary class="section-header" @click="toggleSection('index', $event)">VISUAL INDEX</summary>
@@ -323,11 +329,8 @@ onMounted(() => {
 
 .hr-title-container {
     position: relative;
-    /* This is the anchor for the absolute-positioned title */
     text-align: center;
-    /* This will center the title wrapper */
     margin-bottom: 15px;
-    /* Spacing below the title/hr */
 }
 
 .title-wrapper {
@@ -335,44 +338,49 @@ onMounted(() => {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    /* Perfectly centers the element */
-    padding: 0 0.25em;
-    /* Restored your original padding for a tighter fit */
     background-color: var(--clr-bg-primary);
-    /* Changed to match card background */
-    cursor: default;
-
-    /* NEW: Use Grid to stack the text and auto-size the wrapper */
+    cursor: pointer;
     display: grid;
     place-items: center;
+    overflow: hidden;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    transition: border-color 0.25s ease, background-color 0.25s ease;
+}
+
+.title-wrapper:hover {
+    border-color: var(--clr-border);
+    background-color: var(--clr-bg-secondary);
 }
 
 .title-lang {
-    /* NEW: Both text elements occupy the same grid cell */
     grid-area: 1 / 1;
-
-    /* REMOVED: absolute positioning and manual centering */
-    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
     white-space: nowrap;
-    /* Prevents text from wrapping */
     font-size: 14px;
-    color: var(--text-color);
-    font-weight: normal;
+    font-family: var(--font-family-mono);
+    transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1), 
+                transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+                color 0.25s ease;
 }
 
 .lang-jp {
-    opacity: 0.7;
+    opacity: 0.75;
+    color: var(--clr-text-secondary);
     transform: translateY(0);
 }
 
 .lang-en {
     opacity: 0;
-    transform: translateY(5px);
+    color: var(--clr-accent-primary);
+    letter-spacing: 0.08em;
+    font-weight: bold;
+    transform: translateY(100%);
 }
 
 .title-wrapper:hover .lang-jp {
     opacity: 0;
-    transform: translateY(-5px);
+    transform: translateY(-100%);
 }
 
 .title-wrapper:hover .lang-en {
@@ -433,8 +441,7 @@ onMounted(() => {
     margin-top: 0.5rem;
 }
 
-.style-infographics,
-.style-other {
+.style-infographics {
     width: 100%;
     overflow: visible;
     padding: 0;
@@ -443,23 +450,6 @@ onMounted(() => {
     color: #333;
     text-align: center;
     margin: 1.5rem 0;
-}
-
-.style-infographics:after,
-.style-other:after {
-    height: 100%;
-    color: var(--clr-text-primary);
-    display: inline-block;
-    position: relative;
-    border-radius: 50%;
-    top: -0.8em;
-    font-size: 1em;
-    background-color: var(--clr-bg-primary);
-    padding: 0 0.25em;
-}
-
-.style-other:after {
-    content: "他の情報";
 }
 
 .group-header {
